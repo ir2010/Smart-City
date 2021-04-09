@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartCity">
-
+        <activity android:name=".register.PsDetailsActivity"></activity>
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".community.AddACommunityServiceActivity" />
-        <activity android:name=".register.LoginActivity"></activity>
+        <activity android:name=".register.LoginActivity" />
     </application>
 
 </manifest>
