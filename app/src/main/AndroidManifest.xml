@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".community.AddACommunityServiceActivity" />
-        <activity android:name=".job.LoginActivity"></activity>
+        <activity android:name=".register.LoginActivity"></activity>
     </application>
 
 </manifest>
