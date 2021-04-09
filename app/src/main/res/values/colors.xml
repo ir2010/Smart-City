@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Use these -->
+    <color name="Primary">#FFBB86FC</color>
+    <color name="PrimaryVariant">#FF6200EE</color>
+    <color name="OnPrimary">#FFF</color>
+    <color name="Secondary">#FF03DAC5</color>
+    <color name="SecondaryVariant">#FF018786</color>
+    <color name="OnSecondary">#FF000000</color>
+    <color name="colorAccent">#FFBB86FC</color>
+    <color name="red"></color>
+
+    <color name="primaryTextColor">#FF000000</color>
+    <color name="textColorWhite">#FFFFFF</color>
+    <color name="bottom">#FAFAFA</color>
+    <color name="secondaryTextColor">#6b000000</color>
+    <color name="light_grey">#eeeeee</color>
+    <color name="message_bubble_grey">#e0e0e0</color>
+    <color name="message_text_grey">#757575</color>
+    <color name="menu_background_grey">#40bdbdbd</color>
+    <color name="links">#0099ff</color>
+    <color name="active_links">#FF6200EE</color>
+
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -7,4 +29,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="blue_grey">#14000000</color>
+    <color name="black_trans80">#14000000</color>
+    <color name="bluish_grey">#455A64</color>
 </resources>
