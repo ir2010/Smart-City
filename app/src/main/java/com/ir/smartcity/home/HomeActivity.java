@@ -1,4 +1,4 @@
-package com.ir.smartcity.job;
+package com.ir.smartcity.home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ir.smartcity.R;
+import com.ir.smartcity.job.LoginActivity;
 import com.ir.smartcity.register.LoginActivity;
 import com.ir.smartcity.user.User;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;

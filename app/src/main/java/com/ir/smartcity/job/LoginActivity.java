@@ -23,15 +23,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ir.smartcity.R;
 import com.ir.smartcity.home.HomeActivity;
-import com.ir.smartcity.job.JobDetailsActivity;
 
 import io.realm.Realm;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
-
-
-import com.google.android.material.textfield.TextInputEditText;
-import com.ir.smartcity.R;
 
 public class LoginActivity extends AppCompatActivity {
     String mongoAppID = "smartcity-tiwjb";
