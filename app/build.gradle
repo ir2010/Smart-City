@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
 }
+apply plugin: 'realm-android'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 30
@@ -8,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.ir.smartcity"
-        minSdkVersion 16
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -26,13 +28,53 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    sourceSets {
+        main {
+            res.srcDirs =
+                    [
+                            'src/main/res/layouts/home',
+                            'src/main/res/layouts/register',
+                            'src/main/res/layouts/job',
+                            'src/main/res/layouts/community',
+                            'src/main/res/layouts',
+                            'src/main/res'
+                    ]
+        }
+    }
+}
+
+realm {
+    syncEnabled = true
 }
 
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.android.support:appcompat-v7:30.0.0'
+    implementation 'com.android.support:design:30.0.0'
+    implementation 'com.android.support:cardview-v7:30.0.0'
+    implementation 'com.android.support:appcompat-v7:30.0.1'
+    implementation 'com.android.support:design:30.0.1'
+    implementation 'com.android.support:cardview-v7:30.0.0'
     implementation 'com.google.android.material:material:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.navigation:navigation-fragment:2.3.4'
+    implementation 'androidx.navigation:navigation-ui:2.3.4'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation 'com.mikhaellopez:circularimageview:3.2.0'
+    implementation 'com.github.clans:fab:1.6.4'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation platform('com.google.firebase:firebase-bom:26.8.0') //with bom, you don't need to write versions with firebase
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-database'
+    implementation 'com.google.firebase:firebase-storage'
+    implementation 'androidx.browser:browser:1.3.0'
 }
