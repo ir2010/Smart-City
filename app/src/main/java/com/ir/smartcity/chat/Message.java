@@ -1,13 +1,19 @@
 package com.ir.smartcity.chat;
 
-public class Message
-{
+public class Message {
+
     private String message;
     private String time;
     private String sender;
 
     Message()
     {
+    }
+
+    public Message(String message, String time, String sender) {
+        this.message = message;
+        this.time = time;
+        this.sender = sender;
     }
 
     public String getMessage() {

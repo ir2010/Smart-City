@@ -1,6 +1,7 @@
 package com.ir.smartcity.chat;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -67,7 +69,7 @@ public class ChatActivity extends AppCompatActivity {
 
         header.setText(job.getJobName());
 
-        getUserInfo();
+        getMembersInfo();
 
         sendimgaebutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +85,7 @@ public class ChatActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        GroupNameRef.addChildEventListener(new ChildEventListener() {
+        databaseReference.child("chats/"+job.getJobID()+"/messages").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 if (dataSnapshot.exists()) {
@@ -119,9 +121,9 @@ public class ChatActivity extends AppCompatActivity {
     private void SavedMessageInfoToDatabase() {
 
         String inputmessage = usermessage.getText().toString();
-        String messagekey = GroupNameRef.push().getKey();
+
         if (TextUtils.isEmpty(inputmessage)) {
-            Toast.makeText(this, "Please write a message...", Toast.LENGTH_SHORT).show();
+            usermessage.setError("Write a message...");
         }
         else
         {
@@ -132,24 +134,13 @@ public class ChatActivity extends AppCompatActivity {
             SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("hh:mm a");
             currentTime = simpleDateFormat1.format(calendar.getTime());
 
-            HashMap<String, Object> groupmessagekey = new HashMap<>();
-            GroupNameRef.updateChildren(groupmessagekey);
+            Message message = new Message(inputmessage, currentDate+" "+currentTime, currentUserID);
 
-            GroupMessageRefKey = GroupNameRef.child(messagekey);
-
-            HashMap<String, Object> messageInfoMap = new HashMap<>();
-
-            messageInfoMap.put("name", currentUserName);
-            messageInfoMap.put("message", inputmessage);
-            messageInfoMap.put("date", currentDate);
-            messageInfoMap.put("time", currentTime);
-
-            GroupMessageRefKey.updateChildren(messageInfoMap);
-
+            databaseReference.child("chats/"+job.getJobID()+"/messages").setValue(message);
         }
     }
 
-    private void getUserInfo() {
+    private void getMembersInfo() {
         databaseReference.child("users").child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -164,6 +155,21 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+
+        databaseReference.child("jobs").child(job.getJobID()).child("helpers").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot helpers : snapshot.getChildren())
+                {
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void DisplayMessages(DataSnapshot dataSnapshot) {
@@ -171,10 +177,9 @@ public class ChatActivity extends AppCompatActivity {
 
         while (iterator.hasNext())
         {
-            String chatdate=(String)((DataSnapshot)iterator.next()).getValue();
             String chatmessage=(String)((DataSnapshot)iterator.next()).getValue();
-            String chatname=(String)((DataSnapshot)iterator.next()).getValue();
             String chattime=(String)((DataSnapshot)iterator.next()).getValue();
+            String senderID=(String)((DataSnapshot)iterator.next()).getValue();
 
 
             displaytextmessage.append(chatname+" :\n"+ chatmessage+"\n"+chattime+"   "+chatdate+"\n\n");
