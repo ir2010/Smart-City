@@ -4,7 +4,6 @@
     package="com.ir.smartcity">
 
     <uses-sdk tools:overrideLibrary="com.ismaeldivita.chipnavigation" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -45,7 +44,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".community.AddACommunityServiceActivity" />
+        <activity android:name=".register.LoginActivity" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDeFzCVCNSMbyweG6KJV5Wz06Sn3R3xn5g" />

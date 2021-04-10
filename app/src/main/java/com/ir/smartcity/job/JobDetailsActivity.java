@@ -1,11 +1,9 @@
 package com.ir.smartcity.job;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.fragment.app.FragmentActivity;
-
 import android.graphics.Color;
 import android.os.Bundle;
 
