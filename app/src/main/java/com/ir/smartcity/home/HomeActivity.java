@@ -2,18 +2,10 @@ package com.ir.smartcity.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.github.clans.fab.FloatingActionButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,12 +15,27 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ir.smartcity.R;
-import com.ir.smartcity.job.LoginActivity;
+import com.ir.smartcity.community.CommunityActivity;
+import com.ir.smartcity.job.*;
+
 import com.ir.smartcity.register.LoginActivity;
 import com.ir.smartcity.user.User;
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -62,13 +69,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         setSupportActionBar(toolbar);
 
-        ActionBarDrawerToggle toggle= new ActionBarDrawerToggle(this,drawerLayout,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle= new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        bottomNavigation.implement(findViewById(R.id.bottom_nav), com.ir.smartcity.home.HomeActivity.this);
+        bottomNavigation.implement(findViewById(R.id.bottom_nav), HomeActivity.this);
 
         //begin of slide view
         sliderView = findViewById(R.id.slider_view);
@@ -90,28 +97,25 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference();
-       // uid = user.getUid();
+        // uid = user.getUid();
 
-     //   getUserDetailsFromDatabase();
+        //   getUserDetailsFromDatabase();
 
         newJob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(com.ir.smartcity.home.HomeActivity.this, AddAJobActivity.class));
+                startActivity(new Intent(HomeActivity.this, AddAJobActivity.class));
             }
         });
     }
 
+
     private void getUserDetailsFromDatabase() {
 
-        databaseReference.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("users").child(uid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userDetails = snapshot.getValue(User.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                userDetails = task.getResult().getValue(User.class);
             }
         });
     }
@@ -155,7 +159,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if(id == R.id.nav_login){
             Toast.makeText(this, "logout", Toast.LENGTH_SHORT).show();
             FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(com.ir.smartcity.home.HomeActivity.this, LoginActivity.class));
+            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
             finish();
         }
 
