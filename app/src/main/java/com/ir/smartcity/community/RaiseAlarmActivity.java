@@ -45,13 +45,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.ir.smartcity.R;
 import com.ir.smartcity.home.HomeActivity;
+import com.ir.smartcity.user.User;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -80,6 +84,7 @@ public class RaiseAlarmActivity extends AppCompatActivity
     private ProgressDialog loadingBar;
     private static final int TAKE_PICTURE = 1;
     private Uri imageUri;
+    private Double alarmRange = 0.009090090090;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -212,10 +217,31 @@ public class RaiseAlarmActivity extends AppCompatActivity
 
                 //1 -- active
                 databaseReference.child("alarmHistory").child(uid).child("uploadedAlarms").child(jobID).setValue(jobTitle);
-                Toast.makeText(RaiseAlarmActivity.this, "Alarm raised!", Toast.LENGTH_SHORT).show();
-                loadingBar.dismiss();
-                startActivity(new Intent(RaiseAlarmActivity.this, HomeActivity.class));
-                finish();
+
+
+                //find people
+                databaseReference.child("users").orderByChild("latitude").endAt(alarmRange).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.getValue(User.class).getLongitude() <= alarmRange)
+                        {
+                            databaseReference.child("alarmHistory").child(snapshot.getKey()).child("receivedAlarms").child(jobID).setValue(jobTitle).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(RaiseAlarmActivity.this, "Alarm raised!", Toast.LENGTH_SHORT).show();
+                                    loadingBar.dismiss();
+                                    startActivity(new Intent(RaiseAlarmActivity.this, HomeActivity.class));
+                                    finish();
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
