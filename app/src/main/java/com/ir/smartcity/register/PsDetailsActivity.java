@@ -1,19 +1,14 @@
 package com.ir.smartcity.register;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
@@ -26,9 +21,23 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ir.smartcity.R;
+import com.ir.smartcity.SplashScreen;
+import com.ir.smartcity.home.HomeActivity;
+import com.ir.smartcity.user.User;
+import com.ir.smartcity.user.Username;
 
-public class PsDetailsActivity extends AppCompatActivity {
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class PsdetailsActivity extends AppCompatActivity
+{
     private TextInputEditText nameEditText, usernameEditText, passwordEditText, passwordEditText2, dataEditText;
     private TextInputLayout nameLayout, usernameEditTextLayout, passwordLayout, password2Layout, dataLayout;
     private Button submitButton;
@@ -38,13 +47,13 @@ public class PsDetailsActivity extends AppCompatActivity {
     private FirebaseUser user;
     private String uid;
     private FusedLocationProviderClient fusedLocationProviderClient;
-    private Double lat,longt;
+    private Double latitude, longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ps_details);
+        setContentView(R.layout.activity_psdetails);
 
         fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this);
         if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.M)
@@ -56,9 +65,9 @@ public class PsDetailsActivity extends AppCompatActivity {
                     public void onSuccess(Location location) {
                         if(location !=null)
                         {
-                            lat=location.getLatitude();
-                            longt=location.getLongitude();
-                            Toast.makeText(PsDetailsActivity.this,"Success",Toast.LENGTH_SHORT);
+                            latitude=location.getLatitude();
+                            longitude=location.getLongitude();
+                            Toast.makeText(PsdetailsActivity.this,"Your current location accessed.",Toast.LENGTH_SHORT);
                         }
                     }
                 });
@@ -181,14 +190,14 @@ public class PsDetailsActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(PsDetailsActivity.this, "Oops! Ran into some problem. Please try again later.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PsdetailsActivity.this, "Oops! Ran into some problem. Please try again later.", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void addDetailsIntoDatabase(String name, String username, String password, String data) {
 
-        User user = new User(name, username, data, RegisterActivity.pNo);
+        User user = new User(name, username, data, RegisterActivity.pNo, uid, latitude, longitude);
         Username uname = new Username(uid, password);
 
         databaseReference.child("users").child(uid).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -198,15 +207,45 @@ public class PsDetailsActivity extends AppCompatActivity {
 
                 databaseReference.child("phoneNos").child(RegisterActivity.pNo).setValue(uid);
 
-                Toast.makeText(PsDetailsActivity.this, "Profile created successfully!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(PsDetailsActivity.this, PreferenceActivity.class));
+                Toast.makeText(PsdetailsActivity.this, "Profile created successfully!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(PsdetailsActivity.this, PreferenceActivity.class));
                 finish();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(PsDetailsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(PsdetailsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        for(int grantResult: grantResults)
+        {
+            if(grantResult == PackageManager.PERMISSION_GRANTED)
+            {
+                if(getApplicationContext().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED)
+                {
+                    fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            if(location !=null)
+                            {
+                                latitude=location.getLatitude();
+                                longitude=location.getLongitude();
+                                Toast.makeText(PsdetailsActivity.this,"Your current location accessed.",Toast.LENGTH_SHORT);
+                            }
+                        }
+                    });
+                }
+            }
+            else
+            {
+                Toast.makeText(this, "Location couldn't be accessed. Many of the features of the app will not work properly.", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }
