@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:chatview="http://schemas.android.com/apk/res-auto"
@@ -44,17 +45,23 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <co.intentservice.chatui.ChatView
+<!--    <co.intentservice.chatui.ChatView-->
+<!--        android:id="@+id/chatview"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_below="@+id/layoutHeader"-->
+<!--        chatview:backgroundColor="#fff"-->
+<!--        chatview:bubbleElevation="elevated"-->
+<!--        chatview:inputBackgroundColor="@color/blue_grey"-->
+<!--        chatview:inputHint="Write a message..."-->
+<!--        chatview:inputHintColor="@color/message_text_grey"-->
+<!--        chatview:inputTextColor="#fff"-->
+<!--        chatview:inputTextSize="10sp" />-->
+
+    <com.github.bassaer.chatmessageview.view.ChatView
         android:id="@+id/chatview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/layoutHeader"
-        chatview:backgroundColor="#fff"
-        chatview:bubbleElevation="elevated"
-        chatview:inputBackgroundColor="@color/blue_grey"
-        chatview:inputHint="Write a message..."
-        chatview:inputHintColor="@color/message_text_grey"
-        chatview:inputTextColor="#fff"
-        chatview:inputTextSize="10sp" />
+        android:layout_below="@+id/layoutHeader"/>
 
-</RelativeLayout>
+    </RelativeLayout>
