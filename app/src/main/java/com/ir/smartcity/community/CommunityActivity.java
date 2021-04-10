@@ -1,11 +1,11 @@
 package com.ir.smartcity.community;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
 import com.ir.smartcity.R;
 import com.ir.smartcity.home.BottomNavigation;
-import com.ir.smartcity.home.HomeActivity;
 import com.ir.smartcity.home.SliderAdp;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
