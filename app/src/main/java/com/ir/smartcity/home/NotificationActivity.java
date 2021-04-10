@@ -36,7 +36,7 @@ public class NotificationActivity extends AppCompatActivity
     private DatabaseReference databaseReference;
     private String uid;
     private HashMap<Job, User> jobApplicants = new HashMap<Job, User>();
-    private RelativeLayout noNotifications;
+    private RelativeLayout noNotifications, yesNotifications;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,11 +186,11 @@ public class NotificationActivity extends AppCompatActivity
         adapter=new NotificationAdapter(notificationList);
         NotiListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        if(notificationList.size() == 0)
+        if (notificationList.size() != 0)
         {
-            noNotifications.setVisibility(View.VISIBLE);
-        }
-        else
             noNotifications.setVisibility(View.GONE);
+            yesNotifications.setVisibility(View.VISIBLE);
+        }
+        Toast.makeText(this, notificationList.size(), Toast.LENGTH_SHORT).show();
     }
 }
