@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ir.smartcity.R;
+import com.ir.smartcity.community.Alarm;
 import com.ir.smartcity.job.Job;
 import com.ir.smartcity.user.User;
 
@@ -53,6 +54,35 @@ public class NotificationActivity extends AppCompatActivity
 
     private void initdata() {
         notificationList = new ArrayList<>();
+
+        //listen to alarms
+        databaseReference.child("alarmHistory").child(uid).child("receivedAlarms").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                databaseReference.child("alarms").child(snapshot.getKey()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        Alarm alarm = task.getResult().getValue(Alarm.class);
+
+                        //Toast.makeText(NotificationActivity.this, job.getJobID(), Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(NotificationActivity.this, alarm.getAlarmID(), Toast.LENGTH_SHORT).show();
+                        notificationList.add(new Notification(alarm.getAlarmName()+" - Urgent help needed.",
+                                "","", R.drawable.alarm, "alarm", alarm,
+                                NotificationActivity.this, snapshot));
+                        initRecyclerView();
+//
+                    }
+                });
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         //new requests
         databaseReference.child("jobHistory").child(uid).child("uploadedHires").addChildEventListener(new ChildEventListener() {
@@ -169,6 +199,7 @@ public class NotificationActivity extends AppCompatActivity
 
             }
         });
+
     }
 
 //    private void initdata()

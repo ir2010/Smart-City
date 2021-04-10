@@ -115,6 +115,16 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                         context.startActivity(intent);
                     }
 
+                    if(type == "alarm")
+                    {
+                        Intent intent = new Intent(context, AlarmDetailsActivity.class);
+                        Gson gson = new Gson();
+                        String jobJson = gson.toJson(job);
+
+                        intent.putExtra("job", jobJson);
+                        context.startActivity(intent);
+                    }
+
                     if(type == "request")
                     {
                         //TODO: open helper profile

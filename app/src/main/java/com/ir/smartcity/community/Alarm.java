@@ -1,9 +1,11 @@
 package com.ir.smartcity.community;
 
+import com.ir.smartcity.job.Job;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Alarm {
+public class Alarm extends Job {
 
     private String alarmName;
     private String alarmDeadline;
