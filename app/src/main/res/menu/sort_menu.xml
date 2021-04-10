@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/one"
+        android:title="Pay"
+        android:state_pressed="true"
+        android:color="@color/bluish_grey">
+        </item>
+    <item
+        android:id="@+id/two"
+        android:title="Popularity"
+        android:state_pressed="true"
+        android:color="@color/bluish_grey">
+    </item>
+    <item
+        android:id="@+id/three"
+        android:title="Popularity"
+        android:state_pressed="true"
+        android:color="@color/bluish_grey">
+    </item>
+
+
+
+</menu>

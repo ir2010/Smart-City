@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/notification"
+        android:title="Notifications"
+        android:icon="@drawable/ic_baseline_notifications_24"
+        app:cnb_backgroundColor="@color/Primary"
+        app:cnb_iconColor="#fff"
+        app:cnb_textColor="#000"/>
+    <item
+        android:id="@+id/jobs"
+        android:title="Jobs"
+        android:icon="@drawable/jobs"
+        app:cnb_backgroundColor="@color/Primary"
+        app:cnb_iconColor="#fff"
+        app:cnb_textColor="#000"/>
+    <item
+        android:id="@+id/community"
+        android:title="Community"
+        android:icon="@drawable/community"
+        app:cnb_backgroundColor="@color/Primary"
+        app:cnb_iconColor="#fff"
+        app:cnb_textColor="#000"/>
+    <item
+
+        android:title="" />
+
+</menu>
