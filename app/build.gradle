@@ -87,4 +87,5 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:4.3.1'
     implementation 'com.google.code.gson:gson:2.8.4'
     implementation 'com.github.timigod:android-chat-ui:v0.1.4'
+    implementation 'com.github.bassaer:chatmessageview:2.1.0'
 }

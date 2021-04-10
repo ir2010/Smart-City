@@ -1,6 +1,7 @@
 package com.ir.smartcity.job;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Job {
 
@@ -11,7 +12,8 @@ public class Job {
     private String jobPayment;
     private ArrayList<String> jobPhotoList;
     private String hirerID;
-    private String uid;
+    private String jobID;
+    private HashMap<String, String> applications;
     //private String jobDivider;
 
     public Job()
@@ -27,7 +29,7 @@ public class Job {
         //this.jobDivider = "----------------------------------------------------------------------------------------";
     }
 
-    public Job(String jobName, String jobDeadline, String jobLocation, String jobDetails, String jobPayment, ArrayList<String> jobPhotoList, String hirerID)
+    public Job(String jobName, String jobDeadline, String jobLocation, String jobDetails, String jobPayment, ArrayList<String> jobPhotoList, String hirerID, String jobId)
     {
         this.jobName = jobName;
         this.jobDeadline = jobDeadline;
@@ -37,6 +39,7 @@ public class Job {
         this.jobPhotoList = new ArrayList<String>(jobPhotoList);
         //Collections.copy(this.jobPhotoList, jobPhotoList);
         this.hirerID = hirerID;
+        this.jobID = jobId;
         //this.jobDivider = "----------------------------------------------------------------------------------------";
     }
 
@@ -94,6 +97,22 @@ public class Job {
 
     public void setHirerID(String hirerID) {
         this.hirerID = hirerID;
+    }
+
+    public String getJobID() {
+        return jobID;
+    }
+
+    public void setJobID(String jobID) {
+        this.jobID = jobID;
+    }
+
+    public HashMap<String, String> getApplications() {
+        return applications;
+    }
+
+    public void setApplications(HashMap<String, String> applications) {
+        this.applications = applications;
     }
 
     //    public String getJobDivider() {
