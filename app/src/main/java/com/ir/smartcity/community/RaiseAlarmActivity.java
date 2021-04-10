@@ -19,19 +19,15 @@ public class RaiseAlarmActivity extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationProviderClient;
     private Double dlat,dlongt;
     //these lat & long from firebase
-    private Double lat,longt;
+    private Double lat, longt;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_raise_alarm);
-
-
-
-
-
     }
+
     public void getlocation(View view)
     {
         fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this);

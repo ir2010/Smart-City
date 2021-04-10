@@ -44,6 +44,7 @@ public class NotificationActivity extends AppCompatActivity
         setContentView(R.layout.activity_notification);
 
         noNotifications = findViewById(R.id.no_noti);
+        yesNotifications = findViewById(R.id.yesnotification);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -72,23 +73,29 @@ public class NotificationActivity extends AppCompatActivity
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 for(DataSnapshot applySnapshot : snapshot.getChildren())
                                 {
-                                    databaseReference.child("users").child(applySnapshot.getKey()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                            if(task.isSuccessful())
-                                            {
-                                                User applicant = task.getResult().getValue(User.class);
-                                                Toast.makeText(NotificationActivity.this, applicant.getUid(), Toast.LENGTH_SHORT).show();
-                                                notificationList.add(new Notification(
-                                                        "Your job "+jobSnapshot.getValue()+" has a new applicant - "+applicant.getName()+".",
-                                                        "","", R.drawable.jobapp, "request", job, NotificationActivity.this, applicant));
-
-                                                //Toast.makeText(NotificationActivity.this, job.getJobID(), Toast.LENGTH_SHORT).show();
-                                                //if(notificationList.size() == jobSnapshot.getChildrenCount()*applySnapshot.getChildrenCount())
-                                                initRecyclerView();
-                                            }
-                                        }
-                                    });
+                                    Toast.makeText(NotificationActivity.this, applySnapshot.getKey(), Toast.LENGTH_SHORT).show();
+                                    notificationList.add(new Notification(
+                                            "Your job "+jobSnapshot.getValue()+" has a new applicant - " + applySnapshot.getValue().toString()+".",
+                                            "","", R.drawable.jobapp, "request", job,
+                                            NotificationActivity.this, applySnapshot));
+                                    initRecyclerView();
+//                                        databaseReference.child("users").child(applySnapshot.getKey()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//                                            @Override
+//                                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                                                if(task.isSuccessful())
+//                                                {
+//                                                    User applicant = task.getResult().getValue(User.class);
+//                                                    Toast.makeText(NotificationActivity.this, applicant.getUid(), Toast.LENGTH_SHORT).show();
+//                                                    notificationList.add(new Notification(
+//                                                            "Your job "+jobSnapshot.getValue()+" has a new applicant - "+applicant.getName()+".",
+//                                                            "","", R.drawable.jobapp, "request", job, NotificationActivity.this, applicant));
+//
+//                                                    //Toast.makeText(NotificationActivity.this, job.getJobID(), Toast.LENGTH_SHORT).show();
+//                                                    //if(notificationList.size() == jobSnapshot.getChildrenCount()*applySnapshot.getChildrenCount())
+//                                                    initRecyclerView();
+//                                                }
+//                                            }
+//                                        });
                                 }
                             }
 
@@ -191,6 +198,6 @@ public class NotificationActivity extends AppCompatActivity
             noNotifications.setVisibility(View.GONE);
             yesNotifications.setVisibility(View.VISIBLE);
         }
-        Toast.makeText(this, notificationList.size(), Toast.LENGTH_SHORT).show();
+        // Toast.makeText(NotificationActivity.this, notificationList.size(), Toast.LENGTH_SHORT).show();
     }
 }
