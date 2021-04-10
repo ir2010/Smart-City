@@ -14,6 +14,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -24,8 +25,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.ir.smartcity.R;
 import com.ir.smartcity.job.Job;
+import com.ir.smartcity.user.User;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -41,6 +44,8 @@ public class ChatActivity extends AppCompatActivity {
     private TextView displaytextmessage;
     private TextView header;
     private Job job;
+    private ArrayList<User> helperList =new ArrayList<User>();
+    private User hirer;
 
 
     private String currentGroupName, currentUserName, currentUserID, currentDate, currentTime;
@@ -74,7 +79,7 @@ public class ChatActivity extends AppCompatActivity {
         sendimgaebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SavedMessageInfoToDatabase();
+                saveMessageToDatabase();
                 usermessage.setText("");
                 scrollView.fullScroll(ScrollView.FOCUS_DOWN);
             }
@@ -88,9 +93,7 @@ public class ChatActivity extends AppCompatActivity {
         databaseReference.child("chats/"+job.getJobID()+"/messages").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                if (dataSnapshot.exists()) {
-                    DisplayMessages(dataSnapshot);
-                }
+                DisplayMessages(dataSnapshot);
             }
 
             @Override
@@ -102,7 +105,9 @@ public class ChatActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
+                if (dataSnapshot.exists()) {
+                    DisplayMessages(dataSnapshot);
+                }
             }
 
             @Override
@@ -118,7 +123,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
 
-    private void SavedMessageInfoToDatabase() {
+    private void saveMessageToDatabase() {
 
         String inputmessage = usermessage.getText().toString();
 
@@ -136,7 +141,7 @@ public class ChatActivity extends AppCompatActivity {
 
             Message message = new Message(inputmessage, currentDate+" "+currentTime, currentUserID);
 
-            databaseReference.child("chats/"+job.getJobID()+"/messages").setValue(message);
+            databaseReference.child("chats/"+job.getJobID()+"/messages").push().setValue(message);
         }
     }
 
@@ -159,15 +164,22 @@ public class ChatActivity extends AppCompatActivity {
         databaseReference.child("jobs").child(job.getJobID()).child("helpers").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot helpers : snapshot.getChildren())
+                for(DataSnapshot helper : snapshot.getChildren())
                 {
-
+                    helperList.add(User.getUser(helper.getKey()));
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        databaseReference.child("jobs").child(job.getJobID()).child("hirerID").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                hirer = User.getUser(dataSnapshot.getValue().toString());
             }
         });
     }
@@ -178,13 +190,20 @@ public class ChatActivity extends AppCompatActivity {
         while (iterator.hasNext())
         {
             String chatmessage=(String)((DataSnapshot)iterator.next()).getValue();
-            String chattime=(String)((DataSnapshot)iterator.next()).getValue();
             String senderID=(String)((DataSnapshot)iterator.next()).getValue();
+            String chattime=(String)((DataSnapshot)iterator.next()).getValue();
 
+            databaseReference.child("users/"+senderID+"/name").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                @Override
+                public void onSuccess(DataSnapshot dataSnapshot) {
+                    Toast.makeText(ChatActivity.this, dataSnapshot.toString()+"\n"+ chatmessage+"\n"+chattime+"\n\n", Toast.LENGTH_SHORT).show();
 
-            displaytextmessage.append(chatname+" :\n"+ chatmessage+"\n"+chattime+"   "+chatdate+"\n\n");
+                    displaytextmessage.append(dataSnapshot.getValue().toString()+usermessage+"\n"+ chatmessage+"\n"+chattime+"\n\n");
 
-            scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                    scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                }
+            });
+
         }
     }
 }
