@@ -73,12 +73,13 @@
     <!--                android:textSize="20dp"/>-->
     <!--        </LinearLayout>-->
     <!--    </ScrollView>-->
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_below="@+id/layoutHeader"
-        android:weightSum="100">
+        android:layout_marginTop="@dimen/left_margin"
+        android:layout_below="@+id/layoutHeader">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chats_list"
@@ -92,10 +93,10 @@
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:layout_below="@+id/my_scroll_view"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="502dp" />
+            android:layout_alignParentBottom="true" />
 
     </LinearLayout>
+
     <!--    <LinearLayout-->
     <!--        android:id="@+id/my_linear_layout"-->
     <!--        android:layout_width="match_parent"-->
