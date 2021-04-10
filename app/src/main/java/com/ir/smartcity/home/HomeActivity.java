@@ -3,6 +3,8 @@ package com.ir.smartcity.home;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.github.clans.fab.FloatingActionButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -14,8 +16,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.gson.Gson;
 import com.ir.smartcity.R;
 import com.ir.smartcity.community.CommunityActivity;
+import com.ir.smartcity.community.RaiseAlarmActivity;
 import com.ir.smartcity.job.*;
 
 import com.ir.smartcity.register.LoginActivity;
@@ -31,19 +36,34 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private SliderView sliderView;
-    private int images[]= {R.drawable.pic, R.drawable.pic1, R.drawable.pic2,
-            R.drawable.pic4, R.drawable.pic5, R.drawable.pic6, R.drawable.pic7};
+    private ArrayList<Integer> images = new ArrayList<Integer>(Arrays.asList(R.drawable.pic, R.drawable.pic1, R.drawable.pic2, R.drawable.pic4, R.drawable.pic5, R.drawable.pic6, R.drawable.pic7));
     private SliderAdp sliderAdp;
     private FirebaseUser user;
+    private RecyclerView jobListView;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private Toolbar toolbar;
@@ -58,6 +78,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("notification");
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -108,6 +130,96 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(HomeActivity.this, AddAJobActivity.class));
             }
         });
+
+        newAlarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, RaiseAlarmActivity.class));
+            }
+        });
+
+        populateRecyclerView();
+
+        //deleteDeadJobs();
+    }
+
+    private void populateRecyclerView() {
+
+        jobListView= (RecyclerView)findViewById(R.id.homerecycler);
+        jobListView.setHasFixedSize(true);
+        LinearLayoutManager LinearLayoutManager=new LinearLayoutManager(this);
+        LinearLayoutManager.setReverseLayout(true);
+        LinearLayoutManager.setStackFromEnd(true);
+        jobListView.setLayoutManager(LinearLayoutManager);
+
+        initFirebaseRecyclerView();
+    }
+
+    private void initFirebaseRecyclerView() {
+        FirebaseRecyclerOptions<Job> options = new FirebaseRecyclerOptions.Builder<Job>().setQuery(databaseReference.child("jobs"), Job.class).build();
+        FirebaseRecyclerAdapter<Job, HomeActivity.JobViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Job, HomeActivity.JobViewHolder>(options)
+        {
+            @Override
+            protected void onBindViewHolder(@NonNull final HomeActivity.JobViewHolder jobViewHolder, int i, @NonNull final Job job) {
+                jobViewHolder.jobName.setText(job.getJobName());
+                jobViewHolder.jobDetails.setText(job.getJobDetails());
+                jobViewHolder.jobDeadline.setText(job.getJobDeadline());
+                jobViewHolder.jobPayment.setText(job.getJobPayment());
+
+                jobViewHolder.jobItem.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(HomeActivity.this, JobDetailsActivity.class);
+
+                        Gson gson = new Gson();
+                        String jobJson = gson.toJson(job);
+
+                        intent.putExtra("job", jobJson);
+                        intent.putExtra("jobID", getRef(i).getKey());
+                        startActivity(intent);
+                    }
+                });
+            }
+
+            @NonNull
+            @Override
+            public HomeActivity.JobViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.joblist_item, parent, false);
+
+                return new HomeActivity.JobViewHolder(view);
+            }
+        };
+        jobListView.setAdapter(firebaseRecyclerAdapter);
+        firebaseRecyclerAdapter.startListening();
+    }
+
+    public static class JobViewHolder extends RecyclerView.ViewHolder
+    {
+        TextView jobName, jobDeadline, jobDetails, jobPayment;
+        ImageView jobLocation;
+        RelativeLayout jobItem;
+
+        public JobViewHolder(@NonNull View view)
+        {
+            super(view);
+
+            jobName=view.findViewById(R.id.job_name);
+            jobDeadline=view.findViewById(R.id.job_deadline);
+            jobDetails=view.findViewById(R.id.job_details);
+            jobPayment=view.findViewById(R.id.job_payment);
+            jobLocation=view.findViewById(R.id.job_location);
+            jobItem=view.findViewById(R.id.job_item);
+        }
+    }
+
+    private void deleteDeadJobs() {
+        Calendar calFordDate = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-yyyy");
+        String saveCurrentDate = currentDate.format(calFordDate.getTime());
+
+        Calendar calFordTime = Calendar.getInstance();
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
+        String saveCurrentTime = currentTime.format(calFordTime.getTime());
     }
 
 
@@ -157,6 +269,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         int id = item.getItemId();
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+
         if(id == R.id.nav_login){
             Toast.makeText(this, "logout", Toast.LENGTH_SHORT).show();
             FirebaseAuth.getInstance().signOut();
