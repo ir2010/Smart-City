@@ -6,4 +6,18 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/left_margin"
+        android:layout_marginBottom="@dimen/left_margin"
+        android:layout_below="@+id/slider_view">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/homerecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
