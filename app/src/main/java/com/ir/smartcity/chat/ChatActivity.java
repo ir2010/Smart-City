@@ -4,16 +4,25 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -25,6 +34,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.ir.smartcity.R;
 import com.ir.smartcity.job.Job;
+import com.ir.smartcity.job.JobDetailsActivity;
+import com.ir.smartcity.job.JobsActivity;
 import com.ir.smartcity.user.User;
 
 import java.text.SimpleDateFormat;
@@ -32,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import co.intentservice.chatui.ChatView;
 
@@ -44,10 +56,11 @@ public class ChatActivity extends AppCompatActivity {
     private TextView displaytextmessage;
     private TextView header;
     private Job job;
-    private ArrayList<User> helperList =new ArrayList<User>();
-    private User hirer;
+    private Map<String, String> helperList =new HashMap<String, String>();
+    private String hirer;
 
 
+    private RecyclerView chatListView;
     private String currentGroupName, currentUserName, currentUserID, currentDate, currentTime;
     private FirebaseAuth mauth;
 
@@ -62,10 +75,17 @@ public class ChatActivity extends AppCompatActivity {
         currentUserID = mauth.getCurrentUser().getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        sendimgaebutton = findViewById(R.id.send_message_button);
-        usermessage = findViewById(R.id.input_group_messages);
-        scrollView = findViewById(R.id.my_scroll_view);
+        sendimgaebutton = findViewById(R.id.ivSend);
+        usermessage = findViewById(R.id.etComposeBox);
+        // scrollView = findViewById(R.id.my_scroll_view);
         displaytextmessage = findViewById(R.id.group_chat_text_display);
+
+        chatListView= (RecyclerView)findViewById(R.id.chats_list);
+        chatListView.setHasFixedSize(true);
+        LinearLayoutManager LinearLayoutManager=new LinearLayoutManager(this);
+        LinearLayoutManager.setReverseLayout(true);
+        LinearLayoutManager.setStackFromEnd(true);
+        chatListView.setLayoutManager(LinearLayoutManager);
 
         header = findViewById(R.id.text);
 
@@ -73,7 +93,6 @@ public class ChatActivity extends AppCompatActivity {
         job = gson.fromJson(getIntent().getStringExtra("job"), Job.class);
 
         header.setText(job.getJobName());
-
         getMembersInfo();
 
         sendimgaebutton.setOnClickListener(new View.OnClickListener() {
@@ -81,47 +100,9 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View v) {
                 saveMessageToDatabase();
                 usermessage.setText("");
-                scrollView.fullScroll(ScrollView.FOCUS_DOWN);
             }
         });
     }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        databaseReference.child("chats/"+job.getJobID()+"/messages").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                DisplayMessages(dataSnapshot);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                if (dataSnapshot.exists()) {
-                    DisplayMessages(dataSnapshot);
-                }
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    DisplayMessages(dataSnapshot);
-                }
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
 
     private void saveMessageToDatabase() {
 
@@ -166,7 +147,8 @@ public class ChatActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot helper : snapshot.getChildren())
                 {
-                    helperList.add(User.getUser(helper.getKey()));
+                    helperList.put(helper.getKey(), helper.getValue(String.class));
+                    initFirebaseRecyclerView();
                 }
             }
 
@@ -179,31 +161,47 @@ public class ChatActivity extends AppCompatActivity {
         databaseReference.child("jobs").child(job.getJobID()).child("hirerID").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
-                hirer = User.getUser(dataSnapshot.getValue().toString());
+                hirer = dataSnapshot.getValue().toString();
             }
         });
     }
 
-    private void DisplayMessages(DataSnapshot dataSnapshot) {
-        Iterator iterator=dataSnapshot.getChildren().iterator();
+    private void initFirebaseRecyclerView() {
 
-        while (iterator.hasNext())
+        FirebaseRecyclerOptions<Message> options = new FirebaseRecyclerOptions.Builder<Message>().setQuery(databaseReference.child("chats/"+job.getJobID()+"/messages"), Message.class).build();
+        FirebaseRecyclerAdapter<Message, ChatActivity.MessageViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Message, ChatActivity.MessageViewHolder>(options)
         {
-            String chatmessage=(String)((DataSnapshot)iterator.next()).getValue();
-            String senderID=(String)((DataSnapshot)iterator.next()).getValue();
-            String chattime=(String)((DataSnapshot)iterator.next()).getValue();
+            @Override
+            protected void onBindViewHolder(@NonNull final ChatActivity.MessageViewHolder MessageViewHolder, int i, @NonNull final Message message) {
+                MessageViewHolder.messageText.setText(message.getMessage());
+                MessageViewHolder.messageTime.setText(message.getTime());
+                MessageViewHolder.messageSender.setText(helperList.get(message.getSender()));
+                //Toast.makeText(ChatActivity.this, "bind", Toast.LENGTH_SHORT).show();
+            }
 
-            databaseReference.child("users/"+senderID+"/name").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-                @Override
-                public void onSuccess(DataSnapshot dataSnapshot) {
-                    Toast.makeText(ChatActivity.this, dataSnapshot.toString()+"\n"+ chatmessage+"\n"+chattime+"\n\n", Toast.LENGTH_SHORT).show();
+            @NonNull
+            @Override
+            public ChatActivity.MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item, parent, false);
 
-                    displaytextmessage.append(dataSnapshot.getValue().toString()+usermessage+"\n"+ chatmessage+"\n"+chattime+"\n\n");
+                return new ChatActivity.MessageViewHolder(view);
+            }
+        };
+        chatListView.setAdapter(firebaseRecyclerAdapter);
+        firebaseRecyclerAdapter.startListening();
+    }
 
-                    scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-                }
-            });
+    public static class MessageViewHolder extends RecyclerView.ViewHolder
+    {
+        TextView messageText, messageTime, messageSender;
 
+        public MessageViewHolder(@NonNull View view)
+        {
+            super(view);
+
+            messageText=view.findViewById(R.id.group_chat_text_display);
+            messageTime=view.findViewById(R.id.time);
+            messageSender=view.findViewById(R.id.name);
         }
     }
 }

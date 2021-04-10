@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/name"
+            android:textColor="@color/message_text_grey"
+            android:text="24444"
+          />
+
+
+                <TextView
+                    android:id="@+id/group_chat_text_display"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="10dp"
+                    android:padding="10dp"
+                    android:textAllCaps="false"
+                    android:text="hey"
+                    android:background="@drawable/cc_message_bubble_left"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="12sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/time"
+            android:layout_marginBottom="30dp"
+            android:text="878"/>
+            </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
