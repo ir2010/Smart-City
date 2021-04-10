@@ -6,7 +6,7 @@ public class Message {
     private String time;
     private String sender;
 
-    Message()
+    public Message()
     {
     }
 
