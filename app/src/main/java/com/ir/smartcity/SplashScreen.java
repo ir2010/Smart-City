@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.ir.smartcity.home.HomeActivity;
 import com.ir.smartcity.register.LoginActivity;
 import com.ir.smartcity.register.PreferenceActivity;
+import com.ir.smartcity.register.RegisterActivity;
 
 public class SplashScreen extends AppCompatActivity {
     Handler handle;
@@ -36,7 +37,7 @@ public class SplashScreen extends AppCompatActivity {
                 if(user != null)
                     startActivity(new Intent(SplashScreen.this, HomeActivity.class));
                 else
-                    startActivity(new Intent(SplashScreen.this, LoginActivity.class));
+                    startActivity(new Intent(SplashScreen.this, RegisterActivity.class));
                 finish();
             }
         },4000);

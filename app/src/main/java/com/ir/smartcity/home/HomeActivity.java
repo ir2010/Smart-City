@@ -69,6 +69,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         setSupportActionBar(toolbar);
 
+        navigationView.bringToFront();
         ActionBarDrawerToggle toggle= new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
@@ -97,9 +98,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference();
-         uid = user.getUid();
+        uid = user.getUid();
 
-         getUserDetailsFromDatabase();
+        //getUserDetailsFromDatabase();
 
         newJob.setOnClickListener(new View.OnClickListener() {
             @Override
