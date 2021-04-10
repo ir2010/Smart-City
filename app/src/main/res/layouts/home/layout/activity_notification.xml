@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+
+        android:id="@+id/noti"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/PrimaryVariant">
+
+        <Button
+            android:layout_width="61dp"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:drawableLeft="@drawable/ic_baseline_arrow_back_24"></Button>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:text="Notifications"
+            android:textSize="25dp"
+            android:textColor="#fff"
+            android:textStyle="bold"></TextView>
+
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/noti">
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:id="@+id/noti_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:id="@+id/no_noti"
+        android:visibility="gone"
+        android:layout_below="@+id/noti">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/image"
+            android:src="@drawable/ic_baseline_notifications_off_24"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image"
+            android:text="No Notifications"
+            android:textAlignment="center"
+            android:textColor="@color/message_text_grey"
+            android:textSize="20sp"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>
