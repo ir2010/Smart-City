@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:text="Think of some good line!!"
+                android:text="Select preferred job!!"
                 android:textColor="@color/Primary"
                 app:layout_constraintEnd_toStartOf="@+id/imageView"
                 app:layout_constraintStart_toStartOf="parent"
@@ -85,25 +85,29 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                        <TextView
-                            android:id="@+id/textView3"
+                        <Button
+                            android:id="@+id/teach1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/teach"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
                             android:text="Teaching"
+                            android:backgroundTint="@color/OnPrimary"
                             android:textColor="@color/OnSecondary"
-                            android:textSize="18sp"
+                            android:tag="Teach"
+                            android:textSize="15sp"
+                            android:onClick="select"
+
                             />
+
                         <ImageView
                             android:id="@+id/teach"
                             android:layout_width="75dp"
                             android:layout_height="75dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="15dp"
-                            app:srcCompat="@drawable/teaching"
-                            />
+                            app:srcCompat="@drawable/teaching" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
@@ -116,15 +120,18 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                        <TextView
-                            android:id="@+id/textView4"
+                        <Button
+                            android:id="@+id/electric2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/electric"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
                             android:text="Electrician"
-                            android:textSize="18sp"
+                            android:textSize="15sp"
+                            android:onClick="select"
+                            android:tag="Electric"
+                            android:backgroundTint="@color/OnPrimary"
                             android:textColor="@color/OnSecondary"
                             />
                         <ImageView
@@ -157,15 +164,18 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                        <TextView
-                            android:id="@+id/textView6"
+                        <Button
+                            android:id="@+id/plubber3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/plumber"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
                             android:text="Plumber"
-                            android:textSize="18sp"
+                            android:backgroundTint="@color/OnPrimary"
+                            android:textSize="15sp"
+                            android:onClick="select"
+                            android:tag="Plumber"
                             android:textColor="@color/OnSecondary"
                             />
                         <ImageView
@@ -187,15 +197,18 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                        <TextView
-                            android:id="@+id/textView7"
+                        <Button
+                            android:id="@+id/dailyhelp4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/dailyhelp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
                             android:text="Daily Help"
-                            android:textSize="18sp"
+                            android:textSize="15sp"
+                            android:onClick="select"
+                            android:tag="DailyHelp"
+                            android:backgroundTint="@color/OnPrimary"
                             android:textColor="@color/OnSecondary"
                             />
                         <ImageView
@@ -228,16 +241,20 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                        <TextView
-                            android:id="@+id/textView8"
+                        <Button
+                            android:id="@+id/drive5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/drive"
                             android:layout_centerHorizontal="true"
                             android:textColor="@color/OnSecondary"
                             android:layout_marginTop="10dp"
+                            android:backgroundTint="@color/OnPrimary"
                             android:text="Driving"
-                            android:textSize="18sp"
+                            android:textSize="15sp"
+                            android:onClick="select"
+                            android:tag="Drive"
+
                             />
                         <ImageView
                             android:id="@+id/drive"
@@ -258,8 +275,8 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                        <TextView
-                            android:id="@+id/textView9"
+                        <Button
+                            android:id="@+id/manual6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/manual"
@@ -267,7 +284,10 @@
                             android:textColor="@color/OnSecondary"
                             android:layout_marginTop="10dp"
                             android:text="Manual Work"
-                            android:textSize="18sp"
+                            android:textSize="15sp"
+                            android:onClick="select"
+                            android:tag="Manual"
+
                             />
                         <ImageView
                             android:id="@+id/manual"
@@ -299,16 +319,20 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                        <TextView
-                            android:id="@+id/textView10"
+                        <Button
+                            android:id="@+id/comp7"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/computer"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
                             android:text="Computer/IT"
+                            android:backgroundTint="@color/OnPrimary"
                             android:textColor="@color/OnSecondary"
-                            android:textSize="18sp"
+                            android:textSize="15sp"
+                            android:tag="IT"
+                            android:onClick="select"
+
                             />
                         <ImageView
                             android:id="@+id/computer"
@@ -329,15 +353,19 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                        <TextView
-                            android:id="@+id/textView11"
+                        <Button
+                            android:id="@+id/cook8"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/cooking"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
                             android:text="Cooking"
-                            android:textSize="18sp"
+                            android:textSize="15sp"
+                            android:onClick="select"
+                            android:tag="Cook"
+
+                            android:backgroundTint="@color/OnPrimary"
                             android:textColor="@color/OnSecondary"
                             />
                         <ImageView
@@ -370,15 +398,18 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                        <TextView
-                            android:id="@+id/textView12"
+                        <Button
+                            android:id="@+id/mechanic9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/mechanic"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
                             android:text="Mechanic"
-                            android:textSize="18sp"
+                            android:textSize="15sp"
+                            android:onClick="select"
+                            android:tag="Mechanic"
+                            android:backgroundTint="@color/OnPrimary"
                             android:textColor="@color/OnSecondary"
                             />
                         <ImageView
@@ -400,16 +431,20 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                        <TextView
-                            android:id="@+id/textView13"
+                        <Button
+                            android:id="@+id/errand10"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/errand"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
                             android:text="Errand"
+                            android:backgroundTint="@color/OnPrimary"
                             android:textColor="@color/OnSecondary"
-                            android:textSize="18sp"
+                            android:textSize="15sp"
+                            android:onClick="select"
+                            android:tag="Errand"
+
                             />
                         <ImageView
                             android:id="@+id/errand"
