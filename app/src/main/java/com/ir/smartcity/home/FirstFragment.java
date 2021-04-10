@@ -1,6 +1,8 @@
 package com.ir.smartcity.home;
 
+import android.location.Address;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.ir.smartcity.R;
+
+import java.io.IOException;
+import java.util.List;
 
 public class FirstFragment extends Fragment {
 
@@ -34,3 +39,23 @@ public class FirstFragment extends Fragment {
         });
     }
 }
+    @Override
+    public void onMapLongClick(LatLng latLng) {
+        Log.d("Location","onMapLongClick: "+ latLng.toString());
+        try {
+
+            List<Address> addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+            if(addresses.size()>0)
+            {
+                Address address=addresses.get(0);
+                String streetAddress= address.getAddressLine(0);
+                mMap.addMarker(new MarkerOptions().position(latLng).title(streetAddress).draggable(true));
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        mMap.addMarker(new MarkerOptions().position(latLng));
+
+    }
