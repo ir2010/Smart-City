@@ -97,9 +97,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        // uid = user.getUid();
+         uid = user.getUid();
 
-        //   getUserDetailsFromDatabase();
+         getUserDetailsFromDatabase();
 
         newJob.setOnClickListener(new View.OnClickListener() {
             @Override
