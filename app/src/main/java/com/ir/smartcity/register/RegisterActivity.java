@@ -126,9 +126,9 @@ public class RegisterActivity extends AppCompatActivity {
                 if(snapshot.exists()) //already registered
                 {
                     Intent intent = new Intent(RegisterActivity.this, VerificationActivity.class);
-                    intent.putExtra("phoneNumber", pNo);
-                    intent.putExtra("registered", true);
-                    startActivity(intent);
+                                    intent.putExtra("phoneNumber", pNo);
+                                    intent.putExtra("registered", true);
+                                    startActivity(intent);
 
 //                    final AlertDialog.Builder alertDialog = new AlertDialog.Builder(RegisterActivity.this);
 //                    alertDialog.setTitle("How do you want to login?");

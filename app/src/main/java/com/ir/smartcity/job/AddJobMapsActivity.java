@@ -1,21 +1,24 @@
 package com.ir.smartcity.job;
 
+import androidx.fragment.app.FragmentActivity;
+
+import android.app.Activity;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.fragment.app.FragmentActivity;
-
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.model.Marker;
+import com.ir.smartcity.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.ir.smartcity.R;
 
 import java.io.IOException;
 import java.util.List;
@@ -101,6 +104,14 @@ public class AddJobMapsActivity extends FragmentActivity implements OnMapReadyCa
                 Address address=addresses.get(0);
                 String streetAddress= address.getAddressLine(0);
                 marker.setTitle(streetAddress);
+
+                Intent intent= new Intent();
+                intent.putExtra("latitude", latLng.latitude);
+                intent.putExtra("longitude", latLng.longitude);
+                //Toast.makeText(AppShow.this, "done", Toast.LENGTH_SHORT).show();
+                setResult(Activity.RESULT_OK, intent);
+                finish();
+
                 Toast.makeText(AddJobMapsActivity.this,"Location Saved!",Toast.LENGTH_LONG).show();
             }
         }

@@ -7,7 +7,9 @@ public class Job {
 
     private String jobName;
     private String jobDeadline;
-    private String jobLocation;
+    //private String jobLocation;
+    private Double jobLocationLat, jobLocationLon;
+    private String jobCategory;
     private String jobDetails;
     private String jobPayment;
     private ArrayList<String> jobPhotoList;
@@ -19,29 +21,51 @@ public class Job {
     public Job()
     {}
 
-    public Job(String jobName, String jobDeadline, String jobLocation, String jobDetails, String jobPayment)
-    {
+//    public Job(String jobName, String jobDeadline, String jobLocation, String jobDetails, String jobPayment)
+//    {
+//        this.jobName = jobName;
+//        this.jobDeadline = jobDeadline;
+//        this.jobLocation = jobLocation;
+//        this.jobDetails = jobDetails;
+//        this.jobPayment = jobPayment;
+//        //this.jobDivider = "----------------------------------------------------------------------------------------";
+//    }
+
+    public Job(String jobName, String jobDeadline, Double jobLocationLat, Double jobLocationLon, String jobDetails, String jobPayment) {
         this.jobName = jobName;
         this.jobDeadline = jobDeadline;
-        this.jobLocation = jobLocation;
+        this.jobLocationLat = jobLocationLat;
+        this.jobLocationLon = jobLocationLon;
         this.jobDetails = jobDetails;
         this.jobPayment = jobPayment;
-        //this.jobDivider = "----------------------------------------------------------------------------------------";
     }
 
-    public Job(String jobName, String jobDeadline, String jobLocation, String jobDetails, String jobPayment, ArrayList<String> jobPhotoList, String hirerID, String jobId)
-    {
+    public Job(String jobName, String jobDeadline, Double jobLocationLat, Double jobLocationLon, String jobDetails, String jobPayment, String jobCategory, ArrayList<String> jobPhotoList, String hirerID, String jobID) {
         this.jobName = jobName;
         this.jobDeadline = jobDeadline;
-        this.jobLocation = jobLocation;
+        this.jobLocationLat = jobLocationLat;
+        this.jobLocationLon = jobLocationLon;
+        this.jobCategory = jobCategory;
         this.jobDetails = jobDetails;
         this.jobPayment = jobPayment;
-        this.jobPhotoList = new ArrayList<String>(jobPhotoList);
-        //Collections.copy(this.jobPhotoList, jobPhotoList);
+        this.jobPhotoList = jobPhotoList;
         this.hirerID = hirerID;
-        this.jobID = jobId;
-        //this.jobDivider = "----------------------------------------------------------------------------------------";
+        this.jobID = jobID;
     }
+
+//    public Job(String jobName, String jobDeadline, String jobLocation, String jobDetails, String jobPayment, ArrayList<String> jobPhotoList, String hirerID, String jobId)
+//    {
+//        this.jobName = jobName;
+//        this.jobDeadline = jobDeadline;
+//        this.jobLocation = jobLocation;
+//        this.jobDetails = jobDetails;
+//        this.jobPayment = jobPayment;
+//        this.jobPhotoList = new ArrayList<String>(jobPhotoList);
+//        //Collections.copy(this.jobPhotoList, jobPhotoList);
+//        this.hirerID = hirerID;
+//        this.jobID = jobId;
+//        //this.jobDivider = "----------------------------------------------------------------------------------------";
+//    }
 
     public String getJobName() {
         return jobName;
@@ -59,12 +83,20 @@ public class Job {
         this.jobDeadline = jobDeadline;
     }
 
-    public String getJobLocation() {
-        return jobLocation;
+    public Double getJobLocationLat() {
+        return jobLocationLat;
     }
 
-    public void setJobLocation(String jobLocation) {
-        this.jobLocation = jobLocation;
+    public void setJobLocationLat(Double jobLocationLat) {
+        this.jobLocationLat = jobLocationLat;
+    }
+
+    public Double getJobLocationLon() {
+        return jobLocationLon;
+    }
+
+    public void setJobLocationLon(Double jobLocationLon) {
+        this.jobLocationLon = jobLocationLon;
     }
 
     public String getJobDetails() {
@@ -81,6 +113,14 @@ public class Job {
 
     public void setJobPayment(String jobPayment) {
         this.jobPayment = jobPayment;
+    }
+
+    public String getJobCategory() {
+        return jobCategory;
+    }
+
+    public void setJobCategory(String jobCategory) {
+        this.jobCategory = jobCategory;
     }
 
     public ArrayList<String> getJobPhotoList() {
