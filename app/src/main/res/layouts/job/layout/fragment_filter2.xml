@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".job.FilterFragment2">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RadioButton
+            android:id="@+id/RB0"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="0-250"
+            android:textSize="20dp" />
+
+        <RadioButton
+            android:id="@+id/RB1"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/RB0"
+            android:layout_height="60dp"
+            android:text="Rs 250-Rs 499"
+            android:textSize="20dp" />
+
+        <RadioButton
+            android:id="@+id/RB2"
+            android:layout_below="@+id/RB1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Rs 500-Rs 999"
+            android:textSize="20dp"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/RB3"
+            android:layout_below="@+id/RB2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Rs 1000-Rs 1999"
+            android:textSize="20dp"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/RB4"
+            android:layout_below="@+id/RB3"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Rs 2000-Rs 3000"
+            android:textSize="20dp" />
+
+        <RadioButton
+            android:id="@+id/RB5"
+            android:layout_below="@+id/RB4"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Rs 500-Rs 999"
+            android:textSize="20dp"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/RB6"
+            android:layout_below="@+id/RB5"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Rs 1000-Rs 1999"
+            android:textSize="20dp"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/RB7"
+            android:layout_below="@+id/RB6"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text=">=2000"
+            android:textSize="20dp"></RadioButton>
+
+
+    </RelativeLayout>
+
+
+
+</FrameLayout>

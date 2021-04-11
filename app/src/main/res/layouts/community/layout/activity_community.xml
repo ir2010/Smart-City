@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".community.CommunityActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/header_background"
+            android:padding="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/app_name"
+                android:textColor="@color/OnPrimary"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="15dp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/white_rectangle"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text">
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="Search element"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:paddingStart="15dp"
+                    android:paddingLeft="15dp"
+                    android:textColor="@color/message_text_grey"
+                    android:textSize="16sp"/>
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/search_icon_background"
+                    android:contentDescription="@string/app_name"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_baseline_search_24"
+                    app:tint="@color/OnSecondary" />
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.smarteist.autoimageslider.SliderView
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:id="@+id/slider_view"
+        app:sliderScrollTimeInSec="2"
+        app:sliderStartAutoCycle="true"
+        app:sliderIndicatorPadding="4dp"
+        app:sliderIndicatorRadius="1.5dp"
+        app:sliderIndicatorSelectedColor="#636363"
+        app:sliderIndicatorUnselectedColor="#FFFFFF"
+        app:sliderAnimationDuration="1000"
+        app:sliderIndicatorOrientation="horizontal"
+        app:sliderIndicatorGravity="center_horizontal|bottom"
+
+        />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/jobs_list"
+            android:layout_below="@id/slider_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="100"
+            android:background="#fff" />
+
+   </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

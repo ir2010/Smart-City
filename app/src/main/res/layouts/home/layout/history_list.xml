@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/job_item">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/job_name"
+            android:text="Teach my Std. 5 kid"
+            android:layout_marginTop="@dimen/top_margin"
+            android:layout_marginLeft="@dimen/left_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/job_deadline"
+            android:text="Deadline: Mar 28, 20:00"
+            android:layout_toRightOf="@+id/job_name"
+            android:layout_marginTop="@dimen/top_margin"
+            android:layout_marginLeft="@dimen/left_margin" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_toEndOf="@+id/job_deadline"
+            android:layout_marginTop="@dimen/top_margin"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/job_location"
+            android:src="@drawable/ic_baseline_location_on_24"
+            android:outlineAmbientShadowColor="@color/message_bubble_grey"
+            android:layout_toRightOf="@+id/job_deadline" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/aboveline"
+            android:layout_below="@+id/job_name"
+            android:layout_marginLeft="@dimen/left_margin"
+            android:layout_marginTop="25dp"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/job_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".7"
+                android:paddingRight="0dp"
+                android:text="The job is to teach my child who is in Std. 5 for his exams. Duration will be 2 weeks. Subjects - English, Hindi, Science" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:id="@+id/job_payment"
+                android:layout_toRightOf="@+id/job_details"
+                android:layout_toEndOf="@+id/job_details"
+                android:layout_marginLeft="5dp"
+                android:text="Rs. 8000"/>
+
+
+        </LinearLayout>
+
+        <!--        <TextView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="20dp"-->
+        <!--            android:text="-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;"-->
+        <!--            android:id="@+id/job_divider"-->
+        <!--            android:textColor="@color/message_text_grey"-->
+        <!--            android:layout_marginTop="-5dp"-->
+        <!--            android:layout_below="@id/job_details"-->
+        <!--            android:layout_marginLeft="@dimen/left_margin"/>-->
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/Primary"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/aboveline"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

@@ -64,6 +64,7 @@
         android:layout_marginEnd="20dp"
         android:animateLayoutChanges="true"
         android:layout_marginTop="40dp"
+        android:id="@+id/scrollview"
         android:layout_marginBottom="40dp"
         android:gravity="center_vertical">
 
@@ -80,7 +81,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Risk Title*"
+                android:hint="What's the emergency?"
                 app:startIconDrawable="@drawable/ic_baseline_title_24"
                 android:textColorHint="@color/secondaryTextColor"
                 app:boxCornerRadiusBottomEnd="24dp"
@@ -108,7 +109,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="80dp"
-                android:hint="Risk Details"
+                android:hint="Any Details?"
                 app:startIconDrawable="@drawable/ic_baseline_description_24"
                 android:textColorHint="@color/secondaryTextColor"
                 app:boxCornerRadiusBottomEnd="24dp"
@@ -136,38 +137,42 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/detailslayout"
-                android:drawableLeft="@drawable/ic_baseline_location_on_24"
+                android:id="@+id/photo_text"
+                android:drawableLeft="@drawable/ic_baseline_insert_photo_24"
                 android:drawablePadding="@dimen/left_margin"
                 android:drawableTint="@color/message_text_grey"
-                android:layout_marginTop="30dp"
                 android:layout_marginLeft="5dp"
-                android:id="@+id/location_text"
-                android:text="Job Location*"/>
+                android:layout_marginTop="30dp"
+                android:text="Related Photos"/>
 
-            <ImageButton
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/detailslayout"
-                android:id="@+id/job_location"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="@dimen/left_margin"
-                app:cornerRadius="24dp"
-                android:src="@drawable/ic_baseline_location_on_24"
-                android:elevation="5dp"
-                android:outlineAmbientShadowColor="@color/material_on_background_disabled"
-                android:layout_toRightOf="@+id/location_text"
-                android:onClick="getlocation"/>
-
+                android:id="@+id/job_photos"
+                android:onClick="open_camera"
+                android:layout_toRightOf="@+id/photo_text"
+                android:layout_marginLeft="@dimen/left_margin"
+                android:layout_marginTop="30dp"
+                android:text="@string/select_photo"/>
 
 
         </RelativeLayout>
     </ScrollView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button"
+        android:layout_marginLeft="@dimen/left_margin"
+        android:layout_marginRight="@dimen/left_margin"
+        android:text="@string/warning"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:gravity="right"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_marginTop="20dp"
+        android:id="@+id/button"
         android:layout_below="@+id/relativeLayout"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
@@ -178,7 +183,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/message_bubble_grey"
-            android:text="ADD"
+            android:text="RAISE AN ALARM"
             android:textAllCaps="true"
             android:textColor="@color/primaryTextColor"
             app:cornerRadius="24dp"
