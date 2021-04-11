@@ -1,5 +1,10 @@
 package com.ir.smartcity.user;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class User {
 
     private String name;
@@ -8,17 +13,20 @@ public class User {
     private String data;
     private String uid;
     private String phoneNumber;
+    private static DatabaseReference databaseReference;
+    private Double latitude, longitude;
 
     public User() {
     }
 
-    public User(String name, String username, String data, String phoneNo) {
+    public User(String name, String username, String data, String uid, String phoneNumber, Double latitude, Double longitude) {
         this.name = name;
         this.username = username;
-        //this.password = password;
         this.data = data;
-        //this.uid = uid;
-        phoneNumber = phoneNo;
+        this.uid = uid;
+        this.phoneNumber = phoneNumber;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public String getName() {
@@ -67,5 +75,34 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public static User getUser(String uid)
+    {
+        final User[] user = new User[1];
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("users").child(uid).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                user[0] = dataSnapshot.getValue(User.class);
+            }
+        });
+        return user[0];
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 }

@@ -1,5 +1,6 @@
 package com.ir.smartcity.user;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -10,7 +11,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
  */
 public class PageAdapter extends FragmentStatePagerAdapter {
     private int numOfTabs;
-    public PageAdapter(FragmentManager fm, int numOfTabs) {
+    public PageAdapter(FragmentManager fm,int numOfTabs) {
         super(fm);
         this.numOfTabs = numOfTabs;
     }
