@@ -15,7 +15,7 @@ An application was made to make every day life of people easier by introducing a
   <a href="https://youtu.be/dQw4w9WgXcQ">https://youtu.be/dQw4w9WgXcQ</a>
   
 ## Presentation Link:
-  <a href="https://docs.google.com/presentation/d/1NEbqpM6J6UkmHN_J6NsgOhKvDU6fkfnli4OIg1lh-pk/edit?usp=sharing"> ppt link here </a>
+  <a href="https://drive.google.com/file/d/1eAaHkcs2_4ADXsUZ3iV0wwbdReBNqbIY/view?usp=drivesdk" </a>
   
   
 ## Contributors:
