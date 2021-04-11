@@ -1,21 +1,23 @@
 package com.ir.smartcity.community;
 
-import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Bundle;
 import com.ir.smartcity.R;
 import com.ir.smartcity.home.BottomNavigation;
+import com.ir.smartcity.home.HomeActivity;
 import com.ir.smartcity.home.SliderAdp;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class CommunityActivity extends AppCompatActivity {
 
     private SliderView sliderView;
-    private int images[]= {R.drawable.pic, R.drawable.pic1, R.drawable.pic2,
-            R.drawable.pic4, R.drawable.pic5, R.drawable.pic6, R.drawable.pic7};
+    private ArrayList<Integer> images = new ArrayList<Integer>(Arrays.asList(R.drawable.pic, R.drawable.pic1, R.drawable.pic2, R.drawable.pic4, R.drawable.pic5, R.drawable.pic6, R.drawable.pic7));
     private SliderAdp sliderAdp;
     private BottomNavigation bottomNavigation = new BottomNavigation();
 

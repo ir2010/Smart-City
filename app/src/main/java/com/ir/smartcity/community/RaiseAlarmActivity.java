@@ -5,14 +5,18 @@ package com.ir.smartcity.community;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -37,6 +41,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -55,6 +61,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.ir.smartcity.R;
 import com.ir.smartcity.home.HomeActivity;
+import com.ir.smartcity.register.PsdetailsActivity;
 import com.ir.smartcity.user.User;
 
 import java.text.ParseException;
@@ -70,6 +77,8 @@ public class RaiseAlarmActivity extends AppCompatActivity
 {
     private Button addButton;
     private TextInputEditText jobTitleEditText, jobDetailsEditText;
+    private FusedLocationProviderClient fusedLocationProviderClient;
+    private Double latitude, longitude;
     private ProgressBar progressBar;
     private TextView jobPhotosButton;
     private Double jobLocationLat, jobLocationLon;
@@ -113,6 +122,32 @@ public class RaiseAlarmActivity extends AppCompatActivity
                 jobDetails = jobDetailsEditText.getText().toString().trim();
 
                 //TODO: get location from map, input into lat and lan, and validate=true
+                fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(RaiseAlarmActivity.this);
+                if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.M)
+                {
+                    if(getApplicationContext().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED) {
+                        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                            @Override
+                            public void onSuccess(Location location) {
+                                if (location != null) {
+                                    jobLocationLat = location.getLatitude();
+                                    jobLocationLon = location.getLongitude();
+
+                                    if (!jobPhotoList.isEmpty())
+                                        uploadPhotos();
+                                    else
+                                        addDetailsIntoDatabase();
+                                }
+                                Toast.makeText(RaiseAlarmActivity.this, "Your current location accessed.", Toast.LENGTH_SHORT);
+                            }
+                        });
+                    }
+
+                    else
+                    {
+                        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION },44);
+                    }
+                }
 
                 SimpleDateFormat currentDate=new SimpleDateFormat("E, MMM dd HH:mm");
 
@@ -121,12 +156,6 @@ public class RaiseAlarmActivity extends AppCompatActivity
 //                String saveCurrentTime = currentDate.format(calFordTime.getTime());
 //                jobDeadline =
 
-                if(locationValidate) {
-                    if(!jobPhotoList.isEmpty())
-                        uploadPhotos();
-                    else
-                        addDetailsIntoDatabase();
-                }
             }
         });
     }
