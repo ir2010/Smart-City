@@ -12,7 +12,7 @@ An application was made to make every day life of people easier by introducing a
 	Idea was to bring out the best of what we could do as a society for each other. 
   
 ## Demo Video Link:
-  <a href="https://youtu.be/dQw4w9WgXcQ">https://youtu.be/dQw4w9WgXcQ</a>
+  <a href="https://drive.google.com/file/d/1eAaHkcs2_4ADXsUZ3iV0wwbdReBNqbIY/view?usp=drivesdk"</a>
   
 ## Presentation Link:
   <a href="https://drive.google.com/file/d/1eAaHkcs2_4ADXsUZ3iV0wwbdReBNqbIY/view?usp=drivesdk" </a>
