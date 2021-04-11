@@ -1,10 +1,9 @@
 package com.ir.smartcity.job;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.fragment.app.FragmentActivity;
-import android.graphics.Color;
+
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -25,7 +24,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,10 +32,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.ir.smartcity.R;
-import com.ir.smartcity.home.HomeActivity;
+import com.ir.smartcity.location.APiInterface;
+import com.ir.smartcity.location.Result;
+import com.ir.smartcity.location.Route;
 import com.ir.smartcity.user.User;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,8 +48,8 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class JobDetailsActivity extends FragmentActivity implements OnMapReadyCallback
-{
+public class JobDetailsActivity extends FragmentActivity implements OnMapReadyCallback {
+
     private GoogleMap map;
     private APiInterface apiInterface;
     private List<LatLng> polylinelist;
@@ -58,13 +57,15 @@ public class JobDetailsActivity extends FragmentActivity implements OnMapReadyCa
     private LatLng origion,dest;
 
     private Job job;
-    private TextView jobTitle, jobPayment, jobLocation, jobDetails, jobDeadline, hirerName, hirerPhone;
+    private TextView jobTitle, jobPayment, jobDetails, jobDeadline, hirerName, hirerPhone;
     private User jobHirer;
+    private Double jobLocationLat, jobLocationLon;
     private Button applyButton;
     private String hirerId, jobID, currentUserID;
     private DatabaseReference databaseReference;
     private ImageView hirerImage;
     private User userDetails;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +91,7 @@ public class JobDetailsActivity extends FragmentActivity implements OnMapReadyCa
         jobPayment = findViewById(R.id.job_payment);
         jobDeadline = findViewById(R.id.job_deadline);
         jobDetails = findViewById(R.id.job_details);
-        jobLocation = findViewById(R.id.job_location);
+        //jobLocation = findViewById(R.id.job_location);
         applyButton = findViewById(R.id.button_apply);
         hirerName = findViewById(R.id.hirer_name);
         hirerPhone = findViewById(R.id.hirer_phone);
@@ -101,7 +102,7 @@ public class JobDetailsActivity extends FragmentActivity implements OnMapReadyCa
         jobPayment.setText(job.getJobPayment());
         jobDeadline.setText(job.getJobDeadline());
         jobDetails.setText(job.getJobDetails());
-        jobLocation.setText(job.getJobLocation());
+       // jobLocation.setText(job.getJobLocation());
         hirerId = job.getHirerID();
 
         databaseReference.child("users").child(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -189,35 +190,35 @@ public class JobDetailsActivity extends FragmentActivity implements OnMapReadyCa
     }
 
 
-    private List<LatLng> decodePoly(String encoded) {
-        List<LatLng> poly = new ArrayList<>();
-        int index = 0, len = encoded.length();
-        int lat = 0, lng = 0;
+                    private List<LatLng> decodePoly(String encoded) {
+                        List<LatLng> poly = new ArrayList<>();
+                        int index = 0, len = encoded.length();
+                        int lat = 0, lng = 0;
 
-        while (index < len) {
-            int b, shift = 0, result = 0;
-            do {
-                b = encoded.charAt(index++) - 63;
-                result |= (b & 0x1f) << shift;
-                shift += 5;
-            }
-            while (b >= 0x20);
-            int dlat = ((result & 1) != 0 ? ~(result >> 1) : result >> 1);
-            lat += dlat;
+                        while (index < len) {
+                            int b, shift = 0, result = 0;
+                            do {
+                                b = encoded.charAt(index++) - 63;
+                                result |= (b & 0x1f) << shift;
+                                shift += 5;
+                            }
+                            while (b >= 0x20);
+                            int dlat = ((result & 1) != 0 ? ~(result >> 1) : result >> 1);
+                            lat += dlat;
 
-            shift = 0;
-            result = 0;
-            do {
-                b = encoded.charAt(index++) - 63;
-                result |= (b & 0x1f) << shift;
-                shift += 5;
-            }
-            while (b >= 0x20);
-            int dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
-            lng += dlng;
-            LatLng p = new LatLng((((double) lat / 1E5)), (((double) lng / 1E5)));
-            poly.add(p);
-        }
-        return poly;
-    }
+                            shift = 0;
+                            result = 0;
+                            do {
+                                b = encoded.charAt(index++) - 63;
+                                result |= (b & 0x1f) << shift;
+                                shift += 5;
+                            }
+                            while (b >= 0x20);
+                            int dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+                            lng += dlng;
+                            LatLng p = new LatLng((((double) lat / 1E5)), (((double) lng / 1E5)));
+                            poly.add(p);
+                        }
+                        return poly;
+                    }
 }

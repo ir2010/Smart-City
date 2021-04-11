@@ -8,7 +8,7 @@
     <color name="SecondaryVariant">#FF018786</color>
     <color name="OnSecondary">#FF000000</color>
     <color name="colorAccent">#FFBB86FC</color>
-    <color name="red"></color>
+    <color name="red">#EA4335</color>
 
     <color name="primaryTextColor">#FF000000</color>
     <color name="textColorWhite">#FFFFFF</color>

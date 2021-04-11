@@ -21,14 +21,16 @@
             android:id="@+id/imageView"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/logotentative"
             />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/app_name"
-            android:gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/white"
             android:textSize="24dp"
             />
 
@@ -54,7 +56,7 @@
         android:layout_below="@+id/pagetitle"
         android:padding="12dp"
         android:layout_marginTop="30dp"
-        android:text="Register"
+        android:text="Login/Register"
         android:layout_marginLeft="@dimen/left_margin"
         android:textColor="@color/primaryTextColor"
         android:textSize="40sp"

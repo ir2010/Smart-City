@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".job.FilterActivity">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/PrimaryVariant"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/applybutton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:text="Apply"
+            android:textColor="@color/black"
+            android:onClick="Apply" />
+
+
+        <Button
+            android:id="@+id/backbutton"
+            android:layout_width="72dp"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_baseline_arrow_back_24"
+            android:onClick="Back"
+            app:backgroundTint="@color/PrimaryVariant" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="72dp"
+            android:text="Filters"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/white"
+            android:textSize="30dp"></Button>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/options"
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="60dp"
+        >
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="ChangeFragment"
+            android:text="Job Type"
+            android:textColor="@color/black"
+            app:backgroundTint="@color/Primary" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="ChangeFragment"
+            android:text="Payment"
+            android:textColor="@color/black"
+            app:backgroundTint="@color/Primary" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Distance"
+            android:textColor="@color/black"
+            app:backgroundTint="@color/Primary" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Skill Type"
+            android:textColor="@color/black"
+            app:backgroundTint="@color/Primary" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Deadline "
+            android:textColor="@color/black"
+            app:backgroundTint="@color/Primary" />
+    </LinearLayout>
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="60dp"
+        android:background="@color/light_grey"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@id/options"
+        android:orientation="horizontal">
+
+        <fragment
+            android:id="@+id/fragplace"
+            android:name="com.ir.smartcity.job.FilterFragment3"
+            android:layout_width="match_parent"
+            android:background="@color/light_grey"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="129dp"
+            tools:layout_editor_absoluteY="47dp"
+            android:orientation="horizontal"
+            ></fragment>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".job.FilterFragment1">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <RadioButton
+            android:id="@+id/RB0"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Computer Support"
+            android:textSize="20dp" />
+
+        <RadioButton
+            android:id="@+id/RB1"
+            android:layout_below="@+id/RB0"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Cooking"
+            android:textSize="20dp" />
+
+        <RadioButton
+            android:id="@+id/RB2"
+            android:layout_below="@+id/RB1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Driving"
+            android:textSize="20dp"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/RB3"
+            android:layout_below="@+id/RB2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Electrician"
+            android:textSize="20dp"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/RB4"
+            android:layout_below="@+id/RB3"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Teaching"
+            android:textSize="20dp" />
+
+        <RadioButton
+            android:id="@+id/RB5"
+            android:layout_below="@+id/RB4"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Plumber"
+            android:textSize="20dp"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/RB6"
+            android:layout_below="@+id/RB5"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="House Help"
+            android:textSize="20dp"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/RB7"
+            android:layout_below="@+id/RB6"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Mannual Work"
+            android:textSize="20dp"></RadioButton>
+
+    </RelativeLayout>
+
+</FrameLayout>

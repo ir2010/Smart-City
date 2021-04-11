@@ -22,22 +22,22 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder>{
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public JobAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.joblist_item, parent, false);
-        return new ViewHolder(view);
+        return new JobAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull JobAdapter.ViewHolder holder, int position) {
 
         String name = jobList.get(position).getJobName();
         String deadline = jobList.get(position).getJobDeadline();
-        String location = jobList.get(position).getJobLocation();
+       // String location = jobList.get(position).getJobLocation();
         String details = jobList.get(position).getJobDetails();
         String payment = jobList.get(position).getJobPayment();
         //String line = jobList.get(position).getJobDivider();
 
-        holder.setData(name, deadline, location, details, payment);
+        holder.setData(name, deadline, details, payment);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder>{
             //divider=itemView.findViewById(R.id.job_divider);
         }
 
-        public void setData(String name, String deadline, String location, String details, String payment) {
+        public void setData(String name, String deadline, String details, String payment) {
             jobName.setText(name);
             jobDeadline.setText(deadline);
             jobDetails.setText(details);

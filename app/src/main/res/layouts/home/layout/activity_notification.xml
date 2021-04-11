@@ -34,11 +34,11 @@
         android:id="@+id/yesnotification"
         android:visibility="gone"
         android:layout_below="@+id/noti">
-        <androidx.recyclerview.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
 
-            android:id="@+id/noti_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+        android:id="@+id/noti_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
     </RelativeLayout>
 
     <RelativeLayout

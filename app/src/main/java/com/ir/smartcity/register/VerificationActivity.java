@@ -1,14 +1,14 @@
 package com.ir.smartcity.register;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -107,7 +107,7 @@ public class VerificationActivity extends AppCompatActivity {
                     Toast.makeText(VerificationActivity.this, "Verification Successful", Toast.LENGTH_SHORT).show();
                     if(newUser)
                     {
-                        Intent intent = new Intent(VerificationActivity.this, PsDetailsActivity.class);
+                        Intent intent = new Intent(VerificationActivity.this, PsdetailsActivity.class);
                         //on pressing back button, won't return to this activity again
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);

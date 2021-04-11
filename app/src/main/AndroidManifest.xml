@@ -4,8 +4,18 @@
     package="com.ir.smartcity">
 
     <uses-sdk tools:overrideLibrary="com.ismaeldivita.chipnavigation" />
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the "MyLocation" functionality.
+    -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -14,8 +24,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartCity.NoActionBar">
-        <activity android:name=".chat.ChatActivity"></activity>
-        <activity android:name=".community.RaiseAlarmActivity"></activity>
+        <activity android:name=".community.AlarmDetailsActivity"></activity>
+
+
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDeFzCVCNSMbyweG6KJV5Wz06Sn3R3xn5g" />
+
+        <activity
+            android:name=".job.AddJobMapsActivity"
+            android:label="@string/title_activity_add_job_maps"></activity>
+
+        <uses-library android:name="com.google.android.maps" />
+
+        <!--
+               Set to true if your app is Standalone, that is, it does not require the handheld
+               app to run.
+        -->
+        <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".chat.ChatActivity" />
+        <activity android:name=".community.RaiseAlarmActivity" />
         <activity android:name=".community.CommunityActivity" />
         <activity android:name=".home.NotificationActivity" />
         <activity android:name=".job.AddAJobActivity" />
@@ -37,18 +79,11 @@
             android:name=".home.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.SmartCity.NoActionBar" />
-        <activity android:name=".SplashScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".community.AddACommunityServiceActivity" />
-        <activity android:name=".register.LoginActivity" />
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDeFzCVCNSMbyweG6KJV5Wz06Sn3R3xn5g" />
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
+
     </application>
 
 </manifest>

@@ -77,7 +77,7 @@ public class ChatActivity extends AppCompatActivity {
 
         sendimgaebutton = findViewById(R.id.ivSend);
         usermessage = findViewById(R.id.etComposeBox);
-        // scrollView = findViewById(R.id.my_scroll_view);
+       // scrollView = findViewById(R.id.my_scroll_view);
         displaytextmessage = findViewById(R.id.group_chat_text_display);
 
         chatListView= (RecyclerView)findViewById(R.id.chats_list);

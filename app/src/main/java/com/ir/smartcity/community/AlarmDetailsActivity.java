@@ -1,15 +1,11 @@
 package com.ir.smartcity.community;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+
+import android.net.Uri;
+import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -21,19 +17,34 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 import com.google.gson.Gson;
 import com.ir.smartcity.R;
+import com.ir.smartcity.home.SliderAdp;
 import com.ir.smartcity.job.Job;
 import com.ir.smartcity.location.APiInterface;
 import com.ir.smartcity.location.Result;
 import com.ir.smartcity.location.Route;
 import com.ir.smartcity.user.User;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +64,8 @@ public class AlarmDetailsActivity extends FragmentActivity implements OnMapReady
     private List<LatLng> polylinelist;
     private PolylineOptions polylineOptions;
     private LatLng origion,dest;
+    private ImageView sliderView;
+    private ArrayList<Integer> images = new ArrayList<Integer>();
 
     private Job job;
     private TextView jobTitle, jobPayment, jobDetails, jobDeadline, hirerName, hirerPhone;
@@ -61,8 +74,10 @@ public class AlarmDetailsActivity extends FragmentActivity implements OnMapReady
     private Button applyButton;
     private String hirerId, jobID, currentUserID;
     private DatabaseReference databaseReference;
+    private StorageReference storageReference;
     private ImageView hirerImage;
     private User userDetails;
+    private SliderAdp sliderAdp;
 
 
     @Override
@@ -70,6 +85,9 @@ public class AlarmDetailsActivity extends FragmentActivity implements OnMapReady
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_alarm_details);
+
+        sliderView = findViewById(R.id.job_photos);
+
         SupportMapFragment mapFragment=(SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
         mapFragment.getMapAsync(this);
@@ -95,6 +113,10 @@ public class AlarmDetailsActivity extends FragmentActivity implements OnMapReady
 
         jobTitle.setText(job.getJobName());
         jobDetails.setText(job.getJobDetails());
+
+        downloadPhotos();
+
+
         // jobLocation.setText(job.getJobLocation());
         hirerId = job.getHirerID();
 
@@ -107,21 +129,13 @@ public class AlarmDetailsActivity extends FragmentActivity implements OnMapReady
         });
 
 
-//        databaseReference.child("users").child(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                userDetails = task.getResult().getValue(User.class);
-//                applyButton.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        databaseReference.child("aa").child(jobID).child("applications").child(currentUserID).setValue(userDetails.getName());
-//                        databaseReference.child("jobHistory").child(currentUserID).child("sentHelps").child(jobID).setValue(job.getJobName());
-//                        applyButton.setText("Application Sent. Wait for approval.");
-//                        applyButton.setEnabled(false);
-//                    }
-//                });
-//            }
-//        });
+        databaseReference.child("users").child(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                userDetails = task.getResult().getValue(User.class);
+
+            }
+        });
 
         databaseReference.child("users").child(hirerId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -140,15 +154,44 @@ public class AlarmDetailsActivity extends FragmentActivity implements OnMapReady
 
     }
 
+    private void downloadPhotos() {
+
+        databaseReference.child("jobs").child(jobID).child("jobPhotoList").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snapshot1 : snapshot.getChildren())
+                {
+                    storageReference.child(snapshot1.getValue(String.class)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            if(uri == null)
+                            {
+
+                            }
+                            else
+                            {
+                                Picasso.get().load(uri).fit().centerCrop().into(sliderView);}
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     public void onMapReady(GoogleMap googleMap) {
 
         map=googleMap;
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         map.setTrafficEnabled(true);
-        origion=new LatLng(39.5340,85.3096);
-        dest=new LatLng(25.4358,81.8463);
-        map.addMarker(new MarkerOptions().position(origion).title("Destination"));
-        map.moveCamera(CameraUpdateFactory.newLatLng(origion));
+        dest=new LatLng(job.getJobLocationLat(),job.getJobLocationLon());
+        origion=new LatLng(25.4358,81.8463);
+        map.addMarker(new MarkerOptions().position(dest).title("Emergency Location"));
+        map.moveCamera(CameraUpdateFactory.newLatLng(dest));
         getDirection("23.3441" + "," + "85.3096","25.4358"+","+"81.8463");
 
     }
