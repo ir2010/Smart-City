@@ -24,6 +24,7 @@ import com.ir.smartcity.community.RaiseAlarmActivity;
 import com.ir.smartcity.job.*;
 
 import com.ir.smartcity.register.LoginActivity;
+import com.ir.smartcity.user.ProfileActivity;
 import com.ir.smartcity.user.User;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
@@ -122,7 +123,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         databaseReference = FirebaseDatabase.getInstance().getReference();
         uid = user.getUid();
 
-        //getUserDetailsFromDatabase();
+           //getUserDetailsFromDatabase();
 
         newJob.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -277,7 +278,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             finish();
         }
 
-        //drawerLayout.closeDrawer(GravityCompat.START);
+        if(id == R.id.nav_profile){
+            startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 }

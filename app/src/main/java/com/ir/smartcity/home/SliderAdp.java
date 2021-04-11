@@ -1,5 +1,6 @@
 package com.ir.smartcity.home;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +9,14 @@ import android.widget.ImageView;
 import com.ir.smartcity.R;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
+import java.util.ArrayList;
+
 public class SliderAdp extends SliderViewAdapter<SliderAdp.Holder> {
 
-    int[] images;
+    ArrayList<Integer> images;
 
-    public SliderAdp(int[] images)
+
+    public SliderAdp(ArrayList<Integer> images)
     {
         this.images= images;
     }
@@ -25,15 +29,15 @@ public class SliderAdp extends SliderViewAdapter<SliderAdp.Holder> {
 
     @Override
     public void onBindViewHolder(Holder viewHolder, int position) {
-        viewHolder.imageView.setImageResource(images[position]);
+        viewHolder.imageView.setImageResource(images.get(position));
     }
 
     @Override
     public int getCount() {
-        return images.length;
+        return images.size();
     }
 
-    public class Holder extends ViewHolder {
+    public class Holder extends SliderViewAdapter.ViewHolder {
 
         ImageView imageView;
         public Holder(View itemView) {

@@ -64,16 +64,17 @@ public class NotificationActivity extends AppCompatActivity
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         Alarm alarm = task.getResult().getValue(Alarm.class);
 
+                       // Toast.makeText(NotificationActivity.this, task.getResult().toString(), Toast.LENGTH_SHORT).show();
                         //Toast.makeText(NotificationActivity.this, job.getJobID(), Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(NotificationActivity.this, alarm.getAlarmID(), Toast.LENGTH_SHORT).show();
-                        notificationList.add(new Notification(alarm.getAlarmName()+" - Urgent help needed.",
-                                "","", R.drawable.alarm, "alarm", alarm,
-                                NotificationActivity.this, snapshot));
+                        //Toast.makeText(NotificationActivity.this, alarm.getAlarmID(), Toast.LENGTH_SHORT).show();
+                        //notificationList.add(new Notification(alarm.getAlarmName()+" - Urgent help needed.",
+                           //                 "","", R.drawable.alarm, "alarm", alarm,
+                             //               NotificationActivity.this, snapshot));
                         initRecyclerView();
 //
-                    }
-                });
+                                }
+                            });
 
             }
 
@@ -90,25 +91,25 @@ public class NotificationActivity extends AppCompatActivity
             public void onChildAdded(@NonNull DataSnapshot jobSnapshot, @Nullable String previousChildName)
             {
 
-                //Toast.makeText(NotificationActivity.this, jobSnapshot.toString(), Toast.LENGTH_SHORT).show();
-                databaseReference.child("jobs").child(jobSnapshot.getKey()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        Job job = task.getResult().getValue(Job.class);
+                    //Toast.makeText(NotificationActivity.this, jobSnapshot.toString(), Toast.LENGTH_SHORT).show();
+                    databaseReference.child("jobs").child(jobSnapshot.getKey()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                            Job job = task.getResult().getValue(Job.class);
 
-                        //Toast.makeText(NotificationActivity.this, job.getJobID(), Toast.LENGTH_SHORT).show();
-                        task.getResult().getRef().child("applications").addValueEventListener(new ValueEventListener()
-                        {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for(DataSnapshot applySnapshot : snapshot.getChildren())
-                                {
-                                    Toast.makeText(NotificationActivity.this, applySnapshot.getKey(), Toast.LENGTH_SHORT).show();
-                                    notificationList.add(new Notification(
-                                            "Your job "+jobSnapshot.getValue()+" has a new applicant - " + applySnapshot.getValue().toString()+".",
-                                            "","", R.drawable.jobapp, "request", job,
-                                            NotificationActivity.this, applySnapshot));
-                                    initRecyclerView();
+                            //Toast.makeText(NotificationActivity.this, job.getJobID(), Toast.LENGTH_SHORT).show();
+                            task.getResult().getRef().child("applications").addValueEventListener(new ValueEventListener()
+                            {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    for(DataSnapshot applySnapshot : snapshot.getChildren())
+                                    {
+                                        Toast.makeText(NotificationActivity.this, applySnapshot.getKey(), Toast.LENGTH_SHORT).show();
+                                                    notificationList.add(new Notification(
+                                                            "Your job "+jobSnapshot.getValue()+" has a new applicant - " + applySnapshot.getValue().toString()+".",
+                                                            "","", R.drawable.jobapp, "request", job,
+                                                            NotificationActivity.this, applySnapshot));
+                                        initRecyclerView();
 //                                        databaseReference.child("users").child(applySnapshot.getKey()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
 //                                            @Override
 //                                            public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -126,16 +127,16 @@ public class NotificationActivity extends AppCompatActivity
 //                                                }
 //                                            }
 //                                        });
+                                    }
                                 }
-                            }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
 
-                            }
-                        });
-                    }
-                });
+                                }
+                            });
+                        }
+                    });
             }
 
             @Override
@@ -229,6 +230,6 @@ public class NotificationActivity extends AppCompatActivity
             noNotifications.setVisibility(View.GONE);
             yesNotifications.setVisibility(View.VISIBLE);
         }
-        // Toast.makeText(NotificationActivity.this, notificationList.size(), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(NotificationActivity.this, notificationList.size(), Toast.LENGTH_SHORT).show();
     }
 }

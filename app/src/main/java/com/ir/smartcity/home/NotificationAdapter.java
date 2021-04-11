@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.ir.smartcity.R;
 import com.ir.smartcity.chat.ChatActivity;
+import com.ir.smartcity.community.AlarmDetailsActivity;
 import com.ir.smartcity.job.Job;
 import com.ir.smartcity.register.LoginActivity;
 import com.ir.smartcity.register.RegisterActivity;
