@@ -22,5 +22,12 @@
         app:cnb_backgroundColor="@color/Primary"
         app:cnb_iconColor="#fff"
         app:cnb_textColor="#000"/>
+    <item
+        android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/home_icon"
+        app:cnb_backgroundColor="@color/Primary"
+        app:cnb_iconColor="#fff"
+        app:cnb_textColor="#000"/>
 
 </menu>
