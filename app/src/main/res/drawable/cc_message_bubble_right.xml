@@ -6,8 +6,8 @@
         android:bottom="2px">
 
         <shape android:shape="rectangle">
-            <corners android:radius="@dimen/message_corner_radius"/>
-            <solid android:color="@color/colorPrimary" />
+            <corners android:radius="200dp"/>
+            <solid android:color="@color/Primary" />
         </shape>
     </item>
 </layer-list>
