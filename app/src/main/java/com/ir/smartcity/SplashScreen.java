@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.ir.smartcity.home.HomeActivity;
+import com.ir.smartcity.job.AddJobMapsActivity;
 import com.ir.smartcity.register.LoginActivity;
 import com.ir.smartcity.register.PreferenceActivity;
 import com.ir.smartcity.register.RegisterActivity;
