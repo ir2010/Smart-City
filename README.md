@@ -8,7 +8,7 @@
 
 
 ## Introduction:
-A JAVA based Android Application to make our countrymen smarter,safer,more aware and a better person altogether.It's a community-app for a city that connects people with minimum skill set searching for a job to people who need help.Apart from providing paid job options to people the app encourages them to be more avaiable for each other by having community features and raise-alarm facility.
+A JAVA based Android Application to make our countrymen smarter,safer,more aware and a better person altogether.It's a community-app for a city that connects people with minimum skill set searching for a job to people who need help.Apart from providing paid job options to people ,the app encourages them to be more avaiable for each other by including community features and raise-alarm facility.
   
 ## Demo Video Link:
   <a href="https://drive.google.com/file/d/1eAaHkcs2_4ADXsUZ3iV0wwbdReBNqbIY/view?usp=drivesdk"</a>
