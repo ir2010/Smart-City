@@ -8,8 +8,7 @@
 
 
 ## Introduction:
-An application was made to make every day life of people easier by introducing a community app, which will allow people to help each other within same locality or nearby, depending on the way it is being used.
-	Idea was to bring out the best of what we could do as a society for each other. 
+A JAVA based Android Application to make our countrymen smarter,safer,more aware and a better person altogether.It's a community-app for a city that connects people with minimum skill set searching for a job to people who need help.Apart from providing paid job options to people the app encourages them to be more avaiable for each other by having community features and raise-alarm facility.
   
 ## Demo Video Link:
   <a href="https://drive.google.com/file/d/1eAaHkcs2_4ADXsUZ3iV0wwbdReBNqbIY/view?usp=drivesdk"</a>
