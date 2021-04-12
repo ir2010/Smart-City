@@ -41,6 +41,5 @@ Team Name: CoolNameNotFoundException
 </table>
 
 
-### Made at:
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 <a href="https://hack36.com"> <img src="http://bit.ly/BuiltAtHack36" height=35px> </a>
