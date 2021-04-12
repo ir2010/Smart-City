@@ -65,6 +65,7 @@
         <activity android:name=".job.JobsActivity" />
         <activity android:name=".register.PreferenceActivity" />
         <activity android:name=".job.JobDetailsActivity" />
+        <activity android:name=".user.ProfileActivity"/>
         <activity android:name=".job.FilterActivity" />
         <activity
             android:name=".register.RegisterActivity"

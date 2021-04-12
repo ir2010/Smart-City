@@ -7,8 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.ir.smartcity.R;
 import com.ir.smartcity.home.BottomNavigation;
@@ -36,6 +40,8 @@ public class JobsActivity extends AppCompatActivity {
     private Button buttonSort, buttonFilter;
     private BottomNavigation bottomNavigation = new BottomNavigation();
     private DatabaseReference databaseReference;
+    private FirebaseRecyclerAdapter<Job, JobViewHolder> firebaseRecyclerAdapter;
+    private FirebaseRecyclerOptions<Job> options;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +61,7 @@ public class JobsActivity extends AppCompatActivity {
         LinearLayoutManager.setStackFromEnd(true);
         jobListView.setLayoutManager(LinearLayoutManager);
 
-        initFirebaseRecyclerView();
+        initFirebaseRecyclerView(databaseReference.child("jobs"));
 
         buttonSort.setOnClickListener(new View.OnClickListener() {
 
@@ -69,7 +75,18 @@ public class JobsActivity extends AppCompatActivity {
                 //registering popup with OnMenuItemClickListener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
-                        Toast.makeText(JobsActivity.this,"You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        int id = item.getItemId();
+
+                        if(id == R.id.one) //sort by payment
+                        {
+                            initFirebaseRecyclerView(databaseReference.child("jobs").orderByChild("jobPayment"));
+                        }
+
+                        if(id == R.id.two) //sort by deadline
+                        {
+                            initFirebaseRecyclerView(databaseReference.child("jobs").orderByChild("jobDeadline"));
+                        }
+                        
                         return true;
                     }
                 });
@@ -87,10 +104,10 @@ public class JobsActivity extends AppCompatActivity {
         });
     }
 
-    private void initFirebaseRecyclerView() {
+    private void initFirebaseRecyclerView(Query query) {
 
-        FirebaseRecyclerOptions<Job> options = new FirebaseRecyclerOptions.Builder<Job>().setQuery(databaseReference.child("jobs"), Job.class).build();
-        FirebaseRecyclerAdapter<Job, JobViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Job, JobViewHolder>(options)
+        options = new FirebaseRecyclerOptions.Builder<Job>().setQuery(query, Job.class).build();
+        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Job, JobViewHolder>(options)
         {
             @Override
             protected void onBindViewHolder(@NonNull final JobViewHolder jobViewHolder, int i, @NonNull final Job job) {

@@ -3,19 +3,25 @@
 
     <item
         android:id="@+id/one"
-        android:title="Pay"
+        android:title="Payment"
         android:state_pressed="true"
         android:color="@color/bluish_grey">
         </item>
     <item
         android:id="@+id/two"
-        android:title="Popularity"
+        android:title="Deadline"
         android:state_pressed="true"
         android:color="@color/bluish_grey">
     </item>
     <item
         android:id="@+id/three"
         android:title="Popularity"
+        android:state_pressed="true"
+        android:color="@color/bluish_grey">
+    </item>
+    <item
+        android:id="@+id/four"
+        android:title="Distance"
         android:state_pressed="true"
         android:color="@color/bluish_grey">
     </item>
