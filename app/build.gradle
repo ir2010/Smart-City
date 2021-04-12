@@ -36,6 +36,7 @@ android {
                             'src/main/res/layouts/home',
                             'src/main/res/layouts/register',
                             'src/main/res/layouts/chat',
+                            'src/main/res/layouts/user',
                             'src/main/res/layouts/job',
                             'src/main/res/layouts/community',
                             'src/main/res/layouts',

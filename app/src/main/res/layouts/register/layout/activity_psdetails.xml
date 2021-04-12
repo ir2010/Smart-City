@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/backshort"
 
-    tools:context=".register.PsdetailsActivity">
+    tools:context=".register.PsDetailsActivity">
 
     <LinearLayout
        android:id="@+id/pagetitle"

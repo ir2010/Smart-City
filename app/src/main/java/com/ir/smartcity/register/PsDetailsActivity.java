@@ -21,8 +21,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ir.smartcity.R;
-import com.ir.smartcity.SplashScreen;
-import com.ir.smartcity.home.HomeActivity;
 import com.ir.smartcity.user.User;
 import com.ir.smartcity.user.Username;
 
@@ -30,13 +28,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class PsdetailsActivity extends AppCompatActivity
+public class PsDetailsActivity extends AppCompatActivity
 {
     private TextInputEditText nameEditText, usernameEditText, passwordEditText, passwordEditText2, dataEditText;
     private TextInputLayout nameLayout, usernameEditTextLayout, passwordLayout, password2Layout, dataLayout;
@@ -67,7 +63,7 @@ public class PsdetailsActivity extends AppCompatActivity
                         {
                             latitude=location.getLatitude();
                             longitude=location.getLongitude();
-                            Toast.makeText(PsdetailsActivity.this,"Your current location accessed.",Toast.LENGTH_SHORT);
+                            Toast.makeText(PsDetailsActivity.this,"Your current location accessed.",Toast.LENGTH_SHORT);
                         }
                     }
                 });
@@ -190,7 +186,7 @@ public class PsdetailsActivity extends AppCompatActivity
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(PsdetailsActivity.this, "Oops! Ran into some problem. Please try again later.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PsDetailsActivity.this, "Oops! Ran into some problem. Please try again later.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -207,14 +203,14 @@ public class PsdetailsActivity extends AppCompatActivity
 
                 databaseReference.child("phoneNos").child(RegisterActivity.pNo).setValue(uid);
 
-                Toast.makeText(PsdetailsActivity.this, "Profile created successfully!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(PsdetailsActivity.this, PreferenceActivity.class));
+                Toast.makeText(PsDetailsActivity.this, "Profile created successfully!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(PsDetailsActivity.this, PreferenceActivity.class));
                 finish();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(PsdetailsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(PsDetailsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -236,7 +232,7 @@ public class PsdetailsActivity extends AppCompatActivity
                             {
                                 latitude=location.getLatitude();
                                 longitude=location.getLongitude();
-                                Toast.makeText(PsdetailsActivity.this,"Your current location accessed.",Toast.LENGTH_SHORT);
+                                Toast.makeText(PsDetailsActivity.this,"Your current location accessed.",Toast.LENGTH_SHORT);
                             }
                         }
                     });

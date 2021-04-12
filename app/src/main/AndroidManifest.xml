@@ -71,7 +71,7 @@
             android:label="@string/title_activity_verification"
             android:theme="@style/Theme.SmartCity.NoActionBar.NoActionBar" />
         <activity
-            android:name=".register.PsdetailsActivity"
+            android:name=".register.PsDetailsActivity"
             android:label="@string/title_activity_psdetails"
             android:theme="@style/Theme.SmartCity.NoActionBar.NoActionBar" />
         <activity android:name=".register.LoginActivity" />

@@ -1,45 +1,69 @@
-<h3 align="center"> Collaborate | Co-operate | Co-create </h3>
-<h1 align="center">Smart City</h1>
-<p align="center">
- 
-</p>
+# SmartCity
+Stay tuned... A lot to come!
 
-<a href="https://hack36.com"> <img src="http://bit.ly/BuiltAtHack36" height=40px> </a>
+## To run the project: :boom:
 
-
-
-## Introduction:
-A JAVA based Android Application aimed to make our countrymen smarter, safer, more aware and more connected altogether. It's a community-app deployed on a city-level that connects people with minimum skillset searching for a job, to people who need help for such jobs. Apart from providing paid job options to people.. by people, the app also encourages participation in community-building activities(plantation drives, community event organisation, to name a few). This platform also helps in making the community a safer place by raising an alarm for help to all the users within 1km radius, in case of emergency situation reported by a user. Moreover, the app also facilitates users to put community-related advertisements on approval from app admins.
-
-## Tech Stack
-<img src="https://www.vectorlogo.zone/logos/android/android-ar21.svg" alt="Android" width="100" height="90"/><img src="https://www.vectorlogo.zone/logos/java/java-ar21.svg" alt="Java" width="100" height="90"/> </a><img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="Firebase" width="90" height="90"/><img src="https://www.vectorlogo.zone/logos/google_maps/google_maps-ar21.svg" alt="Google Maps API" width="140" height="90"/><img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-ar21.svg" alt="Git" width="120" height="90"/>
-
-  
-## Demo Video Link:
-  <a href="https://drive.google.com/file/d/16nDfcehiNvBWRU2SmsGprjk6Liolczli/view">Click Here</a>
-  
-## Presentation Link:
-  <a href="https://drive.google.com/file/d/1eAaHkcs2_4ADXsUZ3iV0wwbdReBNqbIY/view">Click Here</a>
-  
-
-  
-  
-## Contributors:
-
-Team Name: CoolNameNotFoundException
-
-<table>
-<tr>
-    <td align="center"><a href="https://www.github.com/ir2010/"><img src="https://avatars.githubusercontent.com/u/46022116?s=460&u=5a5db16a4d00686752dff0cd7b3c7e03c1e956df&v=4" width="100px;" alt=""/><br /><sub><b>Ishu Raj</b></sub></a><br /><a href="https://github.com/ir2010" >  <img src="https://user-images.githubusercontent.com/57852378/93742503-d664ee00-fc0b-11ea-8f75-db2448ff01f1.png"  width="40" height="40"/>
-</a> </td>
-    <td align="center"><a href="https://www.github.com/khetan15/"><img src="https://avatars.githubusercontent.com/u/60043485?v=4" width="100px;" alt=""/><br /><sub><b>Aakanksha Khetan</b></sub></a><br /><a href="https://github.com/khetan15" >  <img src="https://user-images.githubusercontent.com/57852378/93742503-d664ee00-fc0b-11ea-8f75-db2448ff01f1.png"  width="40" height="40"/>
-</a></td>
-   <td align="center"><a href="https://github.com/Chelcy-millenika"><img src="https://avatars.githubusercontent.com/u/54374275?v=4" width="100px;" alt=""/><br /><sub><b>Chelcy Millenika</b></sub></a><br /><a href="https://github.com/Chelcy-millenika" >  <img src="https://user-images.githubusercontent.com/57852378/93742503-d664ee00-fc0b-11ea-8f75-db2448ff01f1.png"  width="40" height="40"/>
-</a></td>
-
-  </tr>
-</table>
+- Open Android Studio
+- File -> New -> Project from Version Control
+- Type 'git@github.com:ir2010/SmartCity.git' in URL field and clone
+- After the project is ready, run the app in an Android phone or an emulator to test
 
 
-[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
-<a href="https://hack36.com"> <img src="http://bit.ly/BuiltAtHack36" height=35px> </a>
+## To contribute to the project: 💻
+
+- Create a new branch (give the branch a name that explains the work you're doing)
+```
+git branch <branch-name>
+```
+- Switch to the branch
+```
+git checkout <branch-name>
+```
+- Check existing branches
+```
+git branch
+```
+
+- Do the work. After completed, check the files that are changed
+```
+git status
+```
+- If there are files that you didn't wish to change but got changed by mistake, go to _.gitignore_ and add those files there.
+- Now, add these files and commit
+```
+git add .
+git commit -m "message explaining work done"
+```
+- Push the work on the remote repo in your respective branch
+```
+git push --set-upstream origin <branch-name>
+```
+
+
+### Keep updating your local project copy with the remote repo main branch
+```
+git pull origin main
+```
+
+
+### If the work on the particular branch is completed and you wish to merge with main branch :warning: 
+
+```diff
+- (Only after everything is working properly) -
+
+git checkout main
+git merge <branch-name>
+
+RESOLVE THE CONFLICTS(if any), ADD, COMMIT, AND PUSH
+```
+## Flow of the app
+<img src="https://github.com/ir2010/SmartCity/blob/main/app/src/main/res/drawable/smartcity.jpg" width="500px;" alt=""/>
+
+
+
+
+
+
+
+
+
