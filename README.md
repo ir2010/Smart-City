@@ -10,12 +10,15 @@
 A JAVA based Android Application aimed to make our countrymen smarter, safer, more aware and more connected altogether. It's a community-app deployed on a city-level that connects people with minimum skillset searching for a job, to people who need help for such jobs. Apart from providing paid job options to people.. by people, the app also encourages participation in community-building activities(plantation drives, community event organisation, to name a few). This platform also helps in making the community a safer place by raising an alarm for help to all the users within 1km radius, in case of emergency situation reported by a user. Moreover, the app also facilitates users to put community-related advertisements on approval from app admins.
 
 
+
 ## Tech Stack
 <img src="https://www.vectorlogo.zone/logos/android/android-ar21.svg" alt="Android" width="100" height="90"/><img src="https://www.vectorlogo.zone/logos/java/java-ar21.svg" alt="Java" width="100" height="90"/> </a><img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="Firebase" width="90" height="90"/><img src="https://www.vectorlogo.zone/logos/google_maps/google_maps-ar21.svg" alt="Google Maps API" width="140" height="90"/><img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-ar21.svg" alt="Git" width="120" height="90"/>
 
   
+  
 ## Demo Video Link:
   <a href="https://drive.google.com/file/d/16nDfcehiNvBWRU2SmsGprjk6Liolczli/view">Click Here</a>
+  
   
   
 ## Presentation Link:
