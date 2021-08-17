@@ -7,7 +7,7 @@
 
 
 ## Introduction:
-A JAVA based Android Application aimed to make our countrymen smarter, safer, more aware and more connected altogether. It's a community-app deployed on a city-level that connects people with minimum skillset searching for a job, to people who need help for such jobs. Apart from providing paid job options to people.. by people, the app also encourages participation in community-building activities(plantation drives, community event organisation, to name a few). This platform also helps in making the community a safer place by raising an alarm for help to all the users within 1km radius, in case of emergency situation reported by a user. Moreover, the app also facilitates users to put community-related advertisements on approval from app admins.
+A JAVA based Android Application aimed to make our countrypeople smarter, safer, more aware and more connected altogether. It's a community-app deployed on a city-level that connects people with minimum skillset searching for a job, to people who need help for such jobs. Apart from providing paid job options to people.. by people, the app also encourages participation in community-building activities (plantation drives, community event organisation, to name a few). This platform also helps in making the community a safer place by raising an alarm for help to all the users within 1km radius, in case of emergency situation reported by a user. Moreover, the app also facilitates users to put community-related advertisements on approval from app admins.
 
 
 
