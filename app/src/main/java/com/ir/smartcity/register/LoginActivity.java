@@ -158,7 +158,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void register(View view) {
         registerButton.setTextColor(Color.RED);
-        startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
+        startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
 
     }
     public void continueAsGuest(View view) {
